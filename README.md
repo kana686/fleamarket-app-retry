@@ -1,66 +1,196 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# COACHTECHフリマアプリ
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 概要
 
-## About Laravel
+本アプリは、ユーザーが商品の閲覧・出品・購入ができるフリマアプリです。
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- 会員登録/ログイン済みユーザー：商品の閲覧・出品・購入が可能です。
+- 未ログインユーザー：商品の閲覧が可能です。
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 目次
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- [実装機能一覧](#実装機能一覧)
+- [ER図](#er図)
+- [環境構築手順](#環境構築手順)
+- [プロジェクト設定](#プロジェクト設定)
+- [使用技術](#使用技術)
 
-## Learning Laravel
+### 実装機能一覧
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- 会員登録画面
+    - 新規会員登録機能
+    - 会員登録後にプロフィール設定画面への遷移
+    - ログイン画面への遷移
+    - メール認証画面への遷移(応用)
+- メール認証画面(応用)
+    - 新規会員登録時のメール認証機能
+    - メール認証再送機能
+- ログイン画面
+    - ログイン機能
+    - 商品一覧画面への遷移
+- ログアウト
+    - セッション破棄・ログアウト機能
+- 商品一覧画面
+    - 商品一覧取得機能
+    - マイリスト一覧取得機能
+    - 商品検索機能
+- 商品詳細画面
+    - 商品詳細取得機能
+    - いいね機能
+    - コメント送信機能
+    - 購入画面への遷移
+- 商品購入画面
+    - 購入前商品情報取得機能
+    - 商品購入機能
+    - 支払い方法選択機能
+    - 配送先変更機能
+- プロフィール画面
+    - ユーザー情報取得機能
+    - プロフィール編集画面への遷移
+- プロフィール編集画面
+    - ユーザー情報変更機能
+- 商品出品画面
+    - 出品商品情報登録機能
+    - 出品商品画像アップロード機能
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## ER図
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+![ER図](src/images/coachtech-fleamarket-app-er.drawio.png)
 
-## Laravel Sponsors
+## 環境構築手順
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+**リポジトリをクローンした後、以下の手順でアプリケーションを起動してください。**
 
-### Premium Partners
+1.  依存パッケージのインストール
+    Composerを使用してライブラリをインストールします。
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+    ```bash
+    docker run --rm \
+        -u "$(id -u):$(id -g)" \
+        -v "$(pwd):/var/www/html" \
+        -w /var/www/html \
+        -e COMPOSER_CACHE_DIR=/tmp/composer_cache \
+        laravelsail/php82-composer:latest \
+        composer install
+    ```
 
-## Contributing
+2.  環境変数の設定
+    `.env.example`をコピーして`.env`を作成します。
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+        ```bash
+        cp .env.example .env
+        ```
 
-## Code of Conduct
+        ※ 必要に応じて .env 内のデータベース設定が以下と一致しているか確認してください。
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+        ```bash
+        DB_CONNECTION=mysql
+        DB_HOST=mysql
+        DB_PORT=3306
+        DB_DATABASE=laravel
+        DB_USERNAME=sail
+        DB_PASSWORD=password
+        ```
 
-## Security Vulnerabilities
+    <details>
+    <summary><b>※推奨設定：エイリアスの登録</b></summary>
+        `sail`コマンドを短縮して入力できるようにするため、エイリアスの設定を推奨します。これにより`./vendor/bin/sail`を毎回入力する手間が省けます。
+        **Zshの場合（macOS Catalina以降のデフォルト）**
+        ```bash
+        echo "alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'" >> ~/.zshrc
+        ```
+        **Bashの場合**
+        ```bash
+        echo "alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'" >> ~/.bashrc
+        ```
+        設定を反映するために、シェルを再起動します。(ターミナルの再起動)
+        ```bash
+        exec $SHELL
+        ```
+        この設定により、以降`sail`コマンドだけでSailを実行できるようになります。
+        ```bash
+        # エイリアス設定前
+        ./vendor/bin/sail up -d
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+        # エイリアス設定後
+        sail up -d
+        ```
 
-## License
+    </details>
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+3.  アプリケーションキーの生成
+
+    ```bash
+    sail artisan key:generate
+    ```
+
+4.  Dockerコンテナの起動
+
+    ```bash
+    sail up -d
+    ```
+
+5.  データベースの構築
+    テーブルを作成し、マイグレーションを実行します。
+
+    ```bash
+    sail artisan migrate
+    ```
+
+6.  フロントエンドの準備
+    パッケージをインストールし、開発用ビルドを実行します。
+
+    ```bash
+    # パッケージのインストール
+    sail npm install
+
+    # 開発用ビルド（変更監視モード）
+    sail npm run dev
+    ```
+
+7.  テストの実行とカバレッジの確認
+    **テストの実行**
+    開発中の機能が正常に動作しているかを確認するために、以下のコマンドでテストを実行できます。
+    ```bash
+    sail test
+    ```
+    **カバレッジの確認**
+    ```bash
+    sail test --coverage
+    ```
+
+## プロジェクト設定
+
+本プロジェクトでは、日本国内での利用を想定し`config/app.php`にて以下の設定を行っています。
+
+- タイムゾーン:`Asia/Tokyo`（日本標準時）
+- 言語（ロケール）:`ja`（日本語）
+- Fakerロケール:`ja_JP`（テストデータ生成時の日本語対応）
+
+## 使用技術
+
+### バックエンド
+
+- PHP 8.2
+- Laravel 10.x
+- Laravel Fortify (認証)
+- Laravel Lang (言語対応)
+
+### データベース
+
+- MySQL 8.0
+- phpMyAdmin
+
+### フロントエンド
+
+- Tailwind CSS / Vite / Alpine.js
+
+### 開発支援ツール
+
+- **Docker / Laravel Sail:** 開発環境構築
+- **Laravel Pint:** PHPコードスタイル校正
+- **Prettier:** フロントエンドコード整形
+
+**開発環境URL**: http://localhost
+
+**作成者**: 乾 華菜
