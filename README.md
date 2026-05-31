@@ -77,9 +77,9 @@
 2.  環境変数の設定
     `.env.example`をコピーして`.env`を作成します。
 
-        ```bash
+    ```bash
         cp .env.example .env
-        ```
+    ```
 
         ※ 必要に応じて .env 内のデータベース設定が以下と一致しているか確認してください。
 
@@ -94,27 +94,37 @@
 
     <details>
     <summary><b>※推奨設定：エイリアスの登録</b></summary>
-        `sail`コマンドを短縮して入力できるようにするため、エイリアスの設定を推奨します。これにより`./vendor/bin/sail`を毎回入力する手間が省けます。
-        **Zshの場合（macOS Catalina以降のデフォルト）**
-        ```bash
-        echo "alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'" >> ~/.zshrc
-        ```
-        **Bashの場合**
-        ```bash
-        echo "alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'" >> ~/.bashrc
-        ```
-        設定を反映するために、シェルを再起動します。(ターミナルの再起動)
-        ```bash
-        exec $SHELL
-        ```
-        この設定により、以降`sail`コマンドだけでSailを実行できるようになります。
-        ```bash
-        # エイリアス設定前
-        ./vendor/bin/sail up -d
 
-        # エイリアス設定後
-        sail up -d
-        ```
+    `sail`コマンドを短縮して入力できるようにするため、エイリアスの設定を推奨します。
+    これにより`./vendor/bin/sail`を毎回入力する手間が省けます。
+
+    Zshの場合（macOS Catalina以降のデフォルト）
+
+    ```bash
+    echo "alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'" >> ~/.zshrc
+    ```
+
+    Bashの場合
+
+    ```bash
+    echo "alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'" >> ~/.bashrc
+    ```
+
+    設定を反映するために、シェルを再起動します。(ターミナルの再起動)
+
+    ```bash
+    exec $SHELL
+    ```
+
+    この設定により、以降`sail`コマンドだけでSailを実行できるようになります。
+
+    ```bash
+    # エイリアス設定前
+    ./vendor/bin/sail up -d
+
+    # エイリアス設定後
+    sail up -d
+    ```
 
     </details>
 
@@ -151,10 +161,13 @@
 7.  テストの実行とカバレッジの確認
     **テストの実行**
     開発中の機能が正常に動作しているかを確認するために、以下のコマンドでテストを実行できます。
+
     ```bash
     sail test
     ```
+
     **カバレッジの確認**
+
     ```bash
     sail test --coverage
     ```
