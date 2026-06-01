@@ -59,9 +59,13 @@
 
 ## 環境構築手順
 
-**リポジトリをクローンした後、以下の手順でアプリケーションを起動してください。**
+1.  リポジトリをクローン
 
-1.  依存パッケージのインストール
+    ```bash
+    後でURL記載
+    ```
+
+2.  依存パッケージのインストール
     Composerを使用してライブラリをインストールします。
 
     ```bash
@@ -74,7 +78,7 @@
         composer install
     ```
 
-2.  環境変数の設定
+3.  環境変数の設定
     `.env.example`をコピーして`.env`を作成します。
 
     ```bash
@@ -91,6 +95,7 @@
         DB_USERNAME=sail
         DB_PASSWORD=password
         ```
+        ※stripe実装後追記
 
     <details>
     <summary><b>※推奨設定：エイリアスの登録</b></summary>
@@ -128,26 +133,57 @@
 
     </details>
 
-3.  アプリケーションキーの生成
+4.  アプリケーションキーの生成
 
     ```bash
     sail artisan key:generate
     ```
 
-4.  Dockerコンテナの起動
+5.  Dockerコンテナの起動
 
     ```bash
     sail up -d
     ```
 
-5.  データベースの構築
+6.  データベースの構築
     テーブルを作成し、マイグレーションを実行します。
 
     ```bash
-    sail artisan migrate
+    sail artisan migrate --seed
     ```
 
-6.  フロントエンドの準備
+    このコマンドの入力後、下記のエラーが表示されることがあります。
+
+    ```bash
+     Illuminate\Database\QueryException
+    SQLSTATE[HY000] [1044] Access denied for user 'sail'@'%' to database 'contact-form-app' (Connection: mysql, SQL: select table_name as `name`,         (data_length + index_length) as `size`, table_comment as `comment`, engine as `engine`, table_collation as `collation` from information_schema.tables where table_schema = 'contact-form-app' and table_type in ('BASE TABLE', 'SYSTEM VERSIONED') order by table_name)
+
+    at vendor/laravel/framework/src/Illuminate/Database/Connection.php:829
+        825▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+        826▕                 );
+        827▕             }
+        828▕
+    ➜ 829▕             throw new QueryException(
+        830▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+        831▕             );
+        832▕         }
+        833▕     }
+
+    +43 vendor frames
+
+    44  artisan:35
+        Illuminate\Foundation\Console\Kernel::handle()
+    ```
+
+    このエラーはコンテナ内にデータが残っており、エラーが生じているケースなどがあります。 その場合は、以下のコマンドを順に実行して各コンテナを再起動して下さい。
+
+    ```bash
+    sail down -v
+    sail up -d　//コマンド実行後にSQLコンテナが立ち上がるまで時間がかかります。30秒ほどお待ちください。
+    sail artisan migrate:fresh --seed
+    ```
+
+7.  フロントエンドの準備
     パッケージをインストールし、開発用ビルドを実行します。
 
     ```bash
@@ -158,7 +194,7 @@
     sail npm run dev
     ```
 
-7.  テストの実行とカバレッジの確認
+8.  テストの実行とカバレッジの確認
     **テストの実行**
     開発中の機能が正常に動作しているかを確認するために、以下のコマンドでテストを実行できます。
 
@@ -203,6 +239,10 @@
 - **Docker / Laravel Sail:** 開発環境構築
 - **Laravel Pint:** PHPコードスタイル校正
 - **Prettier:** フロントエンドコード整形
+
+### 決済システム
+
+- Stripe / Laravel Cashier: 決済・サブスクリプション管理
 
 **開発環境URL**: http://localhost
 
