@@ -66,6 +66,7 @@
     ```
 
 2.  依存パッケージのインストール
+
     Composerを使用してライブラリをインストールします。
 
     ```bash
@@ -82,20 +83,21 @@
     `.env.example`をコピーして`.env`を作成します。
 
     ```bash
-        cp .env.example .env
+    cp .env.example .env
     ```
 
-        ※ 必要に応じて .env 内のデータベース設定が以下と一致しているか確認してください。
+    ※ 必要に応じて .env 内のデータベース設定が以下と一致しているか確認してください。
 
-        ```bash
-        DB_CONNECTION=mysql
-        DB_HOST=mysql
-        DB_PORT=3306
-        DB_DATABASE=laravel
-        DB_USERNAME=sail
-        DB_PASSWORD=password
-        ```
-        ※stripe実装後追記
+    ```bash
+    DB_CONNECTION=mysql
+    DB_HOST=mysql
+    DB_PORT=3306
+    DB_DATABASE=laravel
+    DB_USERNAME=sail
+    DB_PASSWORD=password
+    ```
+
+    ※stripe実装後追記
 
     <details>
     <summary><b>※推奨設定：エイリアスの登録</b></summary>
