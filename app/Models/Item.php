@@ -11,7 +11,7 @@ class Item extends Model
 
     protected $fillable = [
         'user_id',
-        'condition_if',
+        'condition_id',
         'name',
         'brand_name',
         'price',
@@ -41,11 +41,12 @@ class Item extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class)
+            ->withTimestamps();
     }
 
     public function mylists()
     {
-        return $this->belongsToMany(Mylist::class);
+        return $this->hasMany(Mylist::class);
     }
 }
