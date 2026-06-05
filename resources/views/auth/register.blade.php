@@ -13,7 +13,7 @@
         <x-input-field name="password" label="パスワード" type="password" />
         <x-input-field name="password_confirmation" label="確認用パスワード" type="password" />
 
-        <button type="submit">登録する</button>
+        <x-primary-button>登録する</x-primary-button>
     </form>
 
     <a href="/login">ログインはこちら</a>
