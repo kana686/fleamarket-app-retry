@@ -7,7 +7,6 @@
     <form action="/register" method="POST">
         @csrf
 
-        {{-- コンポーネントを呼び出し --}}
         <x-input-field name="name" label="ユーザー名" type="text" />
         <x-input-field name="email" label="メールアドレス" type="email" />
         <x-input-field name="password" label="パスワード" type="password" />
