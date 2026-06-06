@@ -4,7 +4,7 @@
     <div class="register-container">
         <h1>会員登録</h1>
 
-        <form action="/register" method="POST">
+        <form action="/register" method="POST" novalidate>
             @csrf
 
             <x-input-field name="name" label="ユーザー名" type="text" />
