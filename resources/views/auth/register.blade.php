@@ -15,6 +15,8 @@
         <x-primary-button>登録する</x-primary-button>
     </form>
 
-    <a href="/login">ログインはこちら</a>
+    <div class="link-wrapper">
+        <a href="/login">ログインはこちら</a>
+    </div>
 </div>
 @endsection
