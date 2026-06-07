@@ -15,9 +15,24 @@ header {
     height: 30px;
 }
 
-.register-container {
+.register-container,
+.login-container {
     max-width: 400px;
     margin: 60px auto;
+}
+
+@media (min-width: 1400px) and (max-width: 1540px) {
+    .register-container,
+    .login-container {
+        max-width: 800px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 850px) {
+    .register-container,
+    .login-container {
+        max-width: 600px;
+    }
 }
 
 h1 {
