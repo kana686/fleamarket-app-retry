@@ -7,6 +7,10 @@ Route::get('/home', function () {
     return '登録成功！';
 });
 
+Route::get('/', function () {
+    return 'ログイン成功！';
+});
+
 Route::get('/register', [RegisteredUserController::class, 'create']);
 Route::post('/register', [RegisteredUserController::class, 'store']);
 
