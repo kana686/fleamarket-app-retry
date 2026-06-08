@@ -8,31 +8,18 @@ body {
 
 header {
     background-color: #000000;
-    padding: 15px 20px;
+    padding: 10px 20px;
 }
 
 .header-logo img {
-    height: 30px;
+    height: 25px;
 }
 
 .register-container,
 .login-container {
-    max-width: 400px;
+    width: 90%;
+    max-width: 600px;
     margin: 60px auto;
-}
-
-@media (min-width: 1400px) and (max-width: 1540px) {
-    .register-container,
-    .login-container {
-        max-width: 800px;
-    }
-}
-
-@media (min-width: 768px) and (max-width: 850px) {
-    .register-container,
-    .login-container {
-        max-width: 600px;
-    }
 }
 
 h1 {
@@ -48,7 +35,7 @@ h1 {
 .form-group label {
     display: block;
     margin-bottom: 5px;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
 }
 
@@ -75,7 +62,8 @@ h1 {
     border: none;
     cursor: pointer;
     font-weight: bold;
-    margin-top: 50px;
+    font-size: 18px;
+    margin-top: 40px;
     border-radius: 3px;
 }
 
@@ -90,9 +78,9 @@ h1 {
 
 .link-wrapper a {
     display: inline-block;
-    padding: 5px 10px;
+    padding: 10px 15px;
     color: #3b82f6;
-    font-size: 14px;
+    font-size: 16px;
     text-decoration: none;
 }
 
