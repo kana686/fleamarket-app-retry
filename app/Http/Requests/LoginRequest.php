@@ -27,5 +27,4 @@ class LoginRequest extends FormRequest
             'password.required' => 'パスワードを入力してください',
         ];
     }
-
 }
