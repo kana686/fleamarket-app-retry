@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\RegisteredUserController;
+use App\Http\Controllers\AuthenticatedSessionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/home', function () {
@@ -14,6 +15,4 @@ Route::get('/', function () {
 Route::get('/register', [RegisteredUserController::class, 'create']);
 Route::post('/register', [RegisteredUserController::class, 'store']);
 
-Route::get('/login', function () {
-    return view('auth.login');
-});
+Route::get('/login', [AuthenticatedSessionController::class, 'create']);
