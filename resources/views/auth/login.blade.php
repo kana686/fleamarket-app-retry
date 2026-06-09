@@ -4,7 +4,7 @@
     <div class="login-container">
         <h1>ログイン</h1>
 
-        <form action="/login" method="POST" novalidate>
+        <form action="{{ route('login.store') }}" method="POST" novalidate>
             @csrf
 
             <x-input-field name="email" label="メールアドレス" type="email" />
@@ -14,7 +14,7 @@
         </form>
 
         <div class="link-wrapper">
-            <a href="/register">会員登録はこちら</a>
+            <a href="{{ route('register.create') }}">会員登録はこちら</a>
         </div>
     </div>
 </x-app-layout>
