@@ -9,10 +9,17 @@
 </head>
 <body>
 
-    <header>
+    <header class="header">
         <div class="header-logo">
             <img src="{{ asset('images/coachtech-logo-header.png') }}" alt="COACHTECH">
         </div>
+
+        @if (!request()->routeIs('register.create', 'login.create'))
+            <div class="header-right">
+                <x-search-form action="{{ route('items.index') }}" />
+                <x-header-nav />
+            </div>
+        @endif
     </header>
 
     <main>
