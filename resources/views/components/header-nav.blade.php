@@ -5,7 +5,7 @@
             <button type="submit" class="nav-link">ログアウト</button>
         </form>
     @else
-        <a href="{{ route('login') }}" class="nav-link">ログイン</a>
+        <a href="{{ route('login.create') }}" class="nav-link">ログイン</a>
     @endauth
 
     <a href="{{ route('mypage') }}" class="nav-link">マイページ</a>
