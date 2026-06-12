@@ -2,8 +2,17 @@
 
 @php
     $keyword = request('keyword');
-    $currentTab = request('tab', 'recommend');
-    $url = route($routeName, ['tab' => $name, 'keyword' => $keyword]);
+    $params = ['tab' => $name, 'keyword' => $keyword];
+
+    if ($name === 'recommend') {
+        unset($params['tab']);
+    }
+
+    if (empty($keyword)) {
+        unset($params['keyword']);
+    }
+    
+    $url = route($routeName, $params);
 @endphp
 
 <a href="{{ $url }}" 
