@@ -86,11 +86,12 @@ a:hover {
 
 /* --- ヘッダーレイアウト --- */
 .header {
+    height: 80px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #000;
-    padding: 22px 40px;
+    padding: 0 40px;
 }
 
 .header-logo img {
@@ -105,13 +106,20 @@ a:hover {
     gap: 50px;
 }
 
+.search-wrapper {
+    display: flex;
+    align-items: center;
+}
+
 .search-input {
-    padding: 15px 31px;
+    height: 50px;
+    padding: 0 31px;
     width: 500px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 24px;
     color: #000000;
+    box-sizing: border-box;
 }
 
 .search-input::placeholder {
