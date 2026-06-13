@@ -16,6 +16,6 @@
 @endphp
 
 <a href="{{ $url }}" 
-   class="tab-link {{ request('tab') === $name ? 'active' : '' }}">
+   class="tab-link {{ request('tab') === $name || ($name === 'recommend' && empty(request('tab'))) ? 'active' : '' }}">
     {{ $slot }}
 </a>
