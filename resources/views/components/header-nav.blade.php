@@ -9,5 +9,5 @@
     @endauth
 
     <a href="{{ route('mypage') }}" class="nav-link">マイページ</a>
-    <a href="{{ route('sell') }}" class="nav-link">出品</a>
+    <a href="{{ route('sell') }}" class="nav-link btn-sell">出品</a>
 </nav>
