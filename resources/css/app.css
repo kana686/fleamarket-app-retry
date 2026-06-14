@@ -17,7 +17,7 @@ body {
 /* --- 会員登録画面・ログイン画面設定 --- */
 h1 {
     text-align: center;
-    font-size: 24px;
+    font-size: 36px;
     margin-bottom: 50px;
 }
 
@@ -129,14 +129,14 @@ a:hover {
 .header-nav {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 40px;
     margin-left: auto;
 }
 
 .nav-link {
     color: #fff;
     text-decoration: none;
-    font-size: 24x;
+    font-size: 24px;
     display: block;
 }
 
@@ -176,11 +176,6 @@ a:hover {
     }
 }
 
-/* --- 商品一覧画面 --- */
-.items-container {
-    padding: 40px 60px;
-}
-
 /* --- タブ設定 --- */
 .tabs-wrapper {
     width: 100%;
@@ -197,7 +192,9 @@ a:hover {
 .tab-link {
     text-decoration: none;
     color: #5F5F5F;
+    font-size: 1.5rem;
     font-weight: bold;
+    display: inline-block;
     padding-bottom: 8px;
 }
 
@@ -205,23 +202,84 @@ a:hover {
     color: #ff0000;
 }
 
+/* --- 商品一覧設定 --- */
+.items-container {
+    width: 100%;
+    max-width: 1200px; 
+    margin: 0 auto;
+    padding: 20px;
+}
+
 /* --- アイテムカード設定 --- */
 .item-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fill, 290px);
+    gap: 70px;
+    justify-content: start;
+}
+
+.item-card {
+    position: relative;
+    overflow: visible;
+    width: 290px; 
+    height: 320px;
+    background-color: transparent;
+}
+
+.item-card::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 299px;
+    left: 0;
+    z-index: 1;
+    color: rgba(0, 0, 0, 0.3);
+    filter: blur(3px);
+    font-size: 1.5rem;
+    pointer-events: none;
+}
+
+.item-card a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.card-image-wrap {
+    width: 290px;
+    height: 290px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: hidden;
+    box-shadow: -4px 0 4px -2px rgba(0, 0, 0, 0.25), 
+                 4px 0 4px -2px rgba(0, 0, 0, 0.25);
 }
 
 .item-card img {
     width: 100%;
-    aspect-ratio: 1 / 1;
+    height: 281px;
     object-fit: cover;
-    background-color: #e0e0e0;
+    background-color: #D9D9D9;
     border-radius: 4px;
+    display: block;
+    margin: 0;
+}
+
+.card-body {
+    position: relative;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff; 
+    z-index: 2;
 }
 
 .item-name {
-    margin-top: 8px;
-    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    font-size: 1.5rem;
+    font-weight: normal;
+    display: block;
     color: #333;
+    position: relative;
+    z-index: 3;
 }
