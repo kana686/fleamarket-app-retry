@@ -13,9 +13,10 @@
     }
     
     $url = route($routeName, $params);
+
+    $isActive = request('tab') === $name || ($name === 'recommend' && empty(request('tab')));
 @endphp
 
-<a href="{{ $url }}" 
-   class="tab-link {{ request('tab') === $name || ($name === 'recommend' && empty(request('tab'))) ? 'active' : '' }}">
+<a href="{{ $url }}" class="tab-link {{ $isActive ? 'active' : '' }}">
     {{ $slot }}
 </a>
