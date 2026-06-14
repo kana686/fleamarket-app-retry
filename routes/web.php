@@ -29,8 +29,12 @@ Route::get('/sell', function () { // 遷移確認用仮ルート
     return '出品画面への遷移確認';
 })->name('sell');
 
-Route::get('/register', [RegisteredUserController::class, 'create'])->name('register.create');
-Route::post('/register', [RegisteredUserController::class, 'store'])->name('register.store');
+Route::controller(RegisteredUserController::class)->group(function () {
+    Route::get('/register', 'create')->name('register.create');
+    Route::post('/register', 'store')->name('register.store');
+});
 
-Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login.create');
-Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login.store');
+Route::controller(AuthenticatedSessionController::class)->group(function () {
+    Route::get('/login', 'create')->name('login.create');
+    Route::post('/login', 'store')->name('login.store');
+});
