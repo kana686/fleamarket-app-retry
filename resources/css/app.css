@@ -1,89 +1,15 @@
-body {
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-    background-color: #ffffff;
-    color: #333;
-}
+@import 'base/reset.css';
 
-header {
-    background-color: #000000;
-    padding: 10px 20px;
-}
+@import 'base/base.css';
 
-.header-logo img {
-    height: 25px;
-}
+@import 'layouts/layout.css';
+@import 'layouts/auth.css';
+@import 'layouts/items.css';
 
-.register-container,
-.login-container {
-    width: 90%;
-    max-width: 600px;
-    margin: 60px auto;
-}
-
-h1 {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 50px;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.form-control {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    box-sizing: border-box; 
-    border-radius: 3px;
-}
-
-.error-message {
-    color: #ff0000;
-    font-size: 12px;
-    margin-top: 5px;
-    display: block;
-}
-
-.btn-primary {
-    width: 100%;
-    padding: 12px;
-    background-color: #ff5252; 
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 18px;
-    margin-top: 40px;
-    border-radius: 3px;
-}
-
-.btn-primary:hover {
-    background-color: #ff6b6b; 
-}
-
-.link-wrapper {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.link-wrapper a {
-    display: inline-block;
-    padding: 10px 15px;
-    color: #3b82f6;
-    font-size: 16px;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline; 
-}
+@import 'components/header.css';
+@import 'components/button.css';
+@import 'components/form.css';
+@import 'components/card.css';
+@import 'components/tab.css';
+@import 'components/flash.css';
+@import 'components/ui.css';

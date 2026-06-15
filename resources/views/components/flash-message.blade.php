@@ -1,6 +1,6 @@
-@foreach (['success' => 'green', 'error' => 'red'] as $key => $color)
+@foreach (['success' => 'success', 'error' => 'error'] as $key => $type)
     @if (session($key))
-        <div class="bg-{{ $color }}-100 border border-{{ $color }}-400 text-{{ $color }}-700 px-4 py-3 rounded mb-6">
+        <div class="flash-message flash-message--{{ $type }}">
             {{ session($key) }}
         </div>
     @endif

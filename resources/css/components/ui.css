@@ -1,0 +1,26 @@
+.error-message {
+    color: #ff0000;
+    font-size: 12px;
+    margin-top: 5px;
+    display: block;
+}
+
+.link-wrapper {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.link-wrapper a {
+    display: inline-block;
+    padding: 10px 15px;
+    color: #3b82f6;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline; 
+}
+
+
+

@@ -1,0 +1,13 @@
+<nav class="header-nav">
+    @auth
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="nav-link logout-btn">ログアウト</button>
+        </form>
+    @else
+        <a href="{{ route('login.create') }}" class="nav-link">ログイン</a>
+    @endauth
+
+    <a href="{{ route('mypage') }}" class="nav-link">マイページ</a>
+    <a href="{{ route('sell') }}" class="nav-link btn-sell">出品</a>
+</nav>

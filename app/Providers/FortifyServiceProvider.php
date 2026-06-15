@@ -56,5 +56,13 @@ class FortifyServiceProvider extends ServiceProvider
                 return redirect()->intended('/');
             }
         });
+
+        $this->app->instance(LogoutResponse::class, new class implements LogoutResponse
+        {
+            public function toResponse($request)
+            {
+                return redirect('/');
+            }
+        });
     }
 }

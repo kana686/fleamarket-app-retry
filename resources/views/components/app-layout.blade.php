@@ -9,10 +9,33 @@
 </head>
 <body>
 
-    <header>
-        <div class="header-logo">
-            <img src="{{ asset('images/coachtech-logo-header.png') }}" alt="COACHTECH">
+    <header class="header">
+        <div class="header-left">
+            <div class="header-logo">
+                <img src="{{ asset('images/coachtech-logo-header.png') }}" alt="COACHTECH">
+            </div>
         </div>
+
+        @if (!request()->routeIs('register.create', 'login.create'))
+            <div class="header-center">
+                <x-search-form action="{{ route('items.index') }}" />
+            </div>
+
+            <div class="header-right">
+                <x-header-nav />
+            </div>
+        
+            <button class="menu-toggle" aria-label="メニュー開閉">
+                <span></span><span></span><span></span>
+            </button>
+            
+            <nav class="mobile-nav">
+                <div class="mobile-nav-inner">
+                    <x-search-form action="{{ route('items.index') }}" />
+                    <x-header-nav />
+                </div>
+            </nav>
+        @endif
     </header>
 
     <main>
