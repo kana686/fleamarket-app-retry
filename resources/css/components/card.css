@@ -1,9 +1,9 @@
-/* --- アイテムカード設定 --- */
 .item-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, 290px);
     gap: 70px;
-    justify-content: start;
+    justify-content: center;
+    width: 100%;
 }
 
 .item-card {
