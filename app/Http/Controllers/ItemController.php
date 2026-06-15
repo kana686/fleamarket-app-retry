@@ -27,6 +27,6 @@ class ItemController extends Controller
 
         $items = $this->itemService->getItems($keyword, $tab);
 
-        return view('item.index', compact('items'));
+        return view('items.index', compact('items'));
     }
 }
