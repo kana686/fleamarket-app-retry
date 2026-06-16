@@ -2,12 +2,9 @@
 
 use App\Http\Controllers\AuthenticatedSessionController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisteredUserController;
 use Illuminate\Support\Facades\Route;
-
-Route::get('/home', function () {
-    return '登録成功！';
-});
 
 Route::get('/items/{item}', function ($item) { // 遷移確認用仮ルート
     return '商品詳細画面へ遷移成功！ (受け取ったID: '.$item.')';
@@ -32,3 +29,10 @@ Route::controller(AuthenticatedSessionController::class)->group(function () {
 });
 
 Route::get('/', [ItemController::class, 'index'])->name('items.index');
+
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('mypage')->controller(ProfileController::class)->group(function () {
+        Route::get('/profile', 'edit')->name('profile.edit');
+        Route::patch('/profile', 'update')->name('profile.update');
+    });
+});
