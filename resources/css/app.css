@@ -3,7 +3,7 @@
 @import 'base/base.css';
 
 @import 'layouts/layout.css';
-@import 'layouts/auth.css';
+@import 'layouts/common.css';
 @import 'layouts/items.css';
 
 @import 'components/header.css';
