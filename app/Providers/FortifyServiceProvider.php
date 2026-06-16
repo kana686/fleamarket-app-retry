@@ -46,7 +46,7 @@ class FortifyServiceProvider extends ServiceProvider
         {
             public function toResponse($request)
             {
-                return redirect('/home');
+                return redirect()->route('profile.edit');
             }
         });
 
@@ -54,7 +54,7 @@ class FortifyServiceProvider extends ServiceProvider
         {
             public function toResponse($request)
             {
-                return redirect()->intended('/');
+                return redirect()->intended(route('items.index'));
             }
         });
 
@@ -62,7 +62,7 @@ class FortifyServiceProvider extends ServiceProvider
         {
             public function toResponse($request)
             {
-                return redirect('/');
+                return redirect()->route('items.index');
             }
         });
     }
