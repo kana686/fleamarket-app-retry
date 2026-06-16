@@ -6,7 +6,7 @@
     <input type="{{ $type ?? 'text' }}" 
            name="{{ $name }}" 
            class="form-control @error($name) is-invalid @enderror" 
-           value="{{ old($name) }}">
+           value="{{ old($name, $value ?? '') }}"
 
     @error($name)
         <span class="error-message">{{ $message }}</span>
