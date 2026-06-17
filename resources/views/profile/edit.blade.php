@@ -8,7 +8,10 @@
         @csrf
         @method('PATCH')
 
-        {{-- ここに画像のコンポーネントを入れる --}}
+        <div class="profile-image-section">
+            <x-img-field :src="$user->profile_image" />
+            <x-file-upload-button accept="image/*" />
+        </div>
 
             @foreach ($fields as $field)
                 <x-input-field 
