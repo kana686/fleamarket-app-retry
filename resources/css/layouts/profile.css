@@ -1,0 +1,6 @@
+.profile-image-section {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding-bottom: 75px;
+}
