@@ -9,4 +9,20 @@ document.addEventListener('DOMContentLoaded', () => {
             mobileNav.classList.toggle('is-open');
         });
     }
+
+    const imageInput = document.getElementById('profile-image-input');
+    const imagePreview = document.getElementById('profile-image-preview');
+
+    if (imageInput && imagePreview) {
+        imageInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    }
 });

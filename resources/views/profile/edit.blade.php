@@ -9,7 +9,7 @@
         @method('PATCH')
 
         <div class="profile-image-section">
-            <x-img-field :src="$user->profile_image" />
+            <x-img-field :src="$user->img_url" />
             <x-file-upload-button accept="image/*" />
         </div>
 

@@ -18,6 +18,8 @@ class RegisteredUserController extends Controller
 
         auth()->login($user);
 
+        session(['is_first_login' => true]);
+
         return redirect()->route('profile.edit');
     }
 }
