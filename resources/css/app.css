@@ -3,8 +3,9 @@
 @import 'base/base.css';
 
 @import 'layouts/layout.css';
-@import 'layouts/auth.css';
+@import 'layouts/common.css';
 @import 'layouts/items.css';
+@import 'layouts/profile.css';
 
 @import 'components/header.css';
 @import 'components/button.css';
@@ -13,3 +14,4 @@
 @import 'components/tab.css';
 @import 'components/flash.css';
 @import 'components/ui.css';
+@import 'components/img.css';

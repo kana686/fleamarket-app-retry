@@ -18,6 +18,6 @@ class RegisteredUserController extends Controller
 
         auth()->login($user);
 
-        return redirect('/home'); // プロフィール画面作成後修正
+        return redirect()->route('profile.edit');
     }
 }

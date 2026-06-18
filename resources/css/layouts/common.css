@@ -1,5 +1,6 @@
 .register-container,
-.login-container {
+.login-container,
+.profile-edit-container {
     width: 90%;
     max-width: 600px;
     margin: 60px auto;
