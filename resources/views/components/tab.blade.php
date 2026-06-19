@@ -1,20 +1,18 @@
-@props(['name', 'routeName'])
+@props(['name', 'routeName', 'defaultName' => 'recommend'])
 
 @php
     $keyword = request('keyword');
-    $params = ['tab' => $name, 'keyword' => $keyword];
-
-    if ($name === 'recommend') {
-        unset($params['tab']);
-    }
-
-    if (empty($keyword)) {
-        unset($params['keyword']);
+    
+    $params = ['keyword' => $keyword];
+    if ($name !== 'recommend') {
+        $params['tab'] = $name;
     }
     
+    $params = array_filter($params);
     $url = route($routeName, $params);
 
-    $isActive = request('tab') === $name || ($name === 'recommend' && empty(request('tab')));
+    $tab = request('tab');
+    $isActive = ($tab === $name) || (empty($tab) && $name === $defaultName);
 @endphp
 
 <a href="{{ $url }}" class="tab-link {{ $isActive ? 'active' : '' }}">

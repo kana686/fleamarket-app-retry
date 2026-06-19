@@ -15,6 +15,15 @@ class ProfileController extends Controller
         $this->profileService = $profileService;
     }
 
+    public function index()
+    {
+        $user = auth()->user();
+
+        $items = $user->items()->get();
+
+        return view('profile.index', compact('user', 'items'));
+    }
+
     public function edit(Request $request)
     {
         $user = $request->user();
