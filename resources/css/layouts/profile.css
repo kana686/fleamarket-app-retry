@@ -4,3 +4,24 @@
     gap: 40px;
     padding-bottom: 75px;
 }
+
+.profile-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    padding-bottom: 75px;
+    margin-top: 75px;
+}
+
+
+.profile-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 200px;
+}
+
+.user-name {
+    margin: 0;
+}

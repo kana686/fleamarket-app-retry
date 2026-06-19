@@ -15,7 +15,8 @@
     background-color: #ff6b6b; 
 }
 
-.btn-img {
+.btn-img,
+.btn-edit {
     padding: 5px 10px;
     border: 1px solid #ff4d4d;
     color: #ff4d4d;
@@ -23,11 +24,14 @@
     cursor: pointer;
     display: inline-block;
     text-align: center;
-    font-size: 16px;
+    font-size: 26px;
     background-color: transparent;
     transition: background-color 0.2s;
+    text-decoration: none;
 }
 
-.btn-img:hover {
+.btn-img:hover,
+.btn-edit:hover {
     background-color: #fff0f0;
+    text-decoration: none;
 }
