@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileRequest;
+use App\Services\ItemService;
 use App\Services\ProfileService;
 use Illuminate\Http\Request;
 
@@ -10,24 +11,26 @@ class ProfileController extends Controller
 {
     protected $profileService;
 
-    public function __construct(ProfileService $profileService)
+    protected $itemService;
+
+    public function __construct(ProfileService $profileService, ItemService $itemService)
     {
         $this->profileService = $profileService;
+        $this->itemService = $itemService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $user = auth()->user();
+        $tab = $request->query('tab', 'sell');
+        $items = $this->itemService->getItems($request->keyword, $tab);
 
-        $items = $user->items()->get();
-
-        return view('profile.index', compact('user', 'items'));
+        return view('profile.index', compact('user', 'tab', 'items'));
     }
 
     public function edit(Request $request)
     {
         $user = $request->user();
-
         $fields = $this->profileService->getEditFields($user);
 
         return view('profile.edit', compact('user', 'fields'));
