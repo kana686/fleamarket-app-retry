@@ -24,18 +24,19 @@ class ItemService
                 break;
 
             case 'sell':
-                $query->where('seller_id', $userId);
+                $query->where('user_id', $userId);
                 break;
 
             case 'buy':
-                $query->where('buyer_id', $userId)
-                    ->where('seller_id', '!=', $userId);
+                $query->whereHas('purchases', function ($q) use ($userId) {
+                    $q->where('user_id', $userId);
+                });
                 break;
 
             case 'recommend':
             default:
                 if ($userId) {
-                    $query->where('seller_id', '!=', $userId);
+                    $query->where('user_id', '!=', $userId);
                 }
                 break;
         }
