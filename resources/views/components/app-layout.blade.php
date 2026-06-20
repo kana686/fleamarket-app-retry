@@ -16,7 +16,9 @@
     <header class="header">
         <div class="header-left">
             <div class="header-logo">
-                <img src="{{ asset('images/coachtech-logo-header.png') }}" alt="COACHTECH">
+                <a href="{{ route('items.index') }}">
+                    <img src="{{ asset('images/coachtech-logo-header.png') }}" alt="COACHTECH">
+                </a>
             </div>
         </div>
 
@@ -41,7 +43,7 @@
             </nav>
         @endif
     </header>
-    
+
     <main>
         <x-flash-message />
         {{ $slot }}
