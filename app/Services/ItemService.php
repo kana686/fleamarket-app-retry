@@ -10,15 +10,34 @@ class ItemService
     public function getItems(?string $keyword, string $tab)
     {
         $query = Item::query();
+        $userId = Auth::id();
 
         if (! empty($keyword)) {
             $query->where('name', 'LIKE', '%'.$keyword.'%');
         }
 
-        if ($tab === 'mylist') {
-            $query->whereHas('mylists', function ($q) {
-                $q->where('user_id', Auth::id());
-            });
+        switch ($tab) {
+            case 'mylist':
+                $query->whereHas('mylists', function ($q) use ($userId) {
+                    $q->where('user_id', $userId);
+                });
+                break;
+
+            case 'sell':
+                $query->where('seller_id', $userId);
+                break;
+
+            case 'buy':
+                $query->where('buyer_id', $userId)
+                    ->where('seller_id', '!=', $userId);
+                break;
+
+            case 'recommend':
+            default:
+                if ($userId) {
+                    $query->where('seller_id', '!=', $userId);
+                }
+                break;
         }
 
         return $query->latest()->get();
