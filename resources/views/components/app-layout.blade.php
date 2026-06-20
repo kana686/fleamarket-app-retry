@@ -9,16 +9,22 @@
 </head>
 <body>
 
+    @php
+        $searchRoute = request()->routeIs('mypage') ? route('mypage') : route('items.index');
+    @endphp
+
     <header class="header">
         <div class="header-left">
             <div class="header-logo">
-                <img src="{{ asset('images/coachtech-logo-header.png') }}" alt="COACHTECH">
+                <a href="{{ route('items.index') }}">
+                    <img src="{{ asset('images/coachtech-logo-header.png') }}" alt="COACHTECH">
+                </a>
             </div>
         </div>
 
         @if (!request()->routeIs('register.create', 'login.create'))
             <div class="header-center">
-                <x-search-form action="{{ route('items.index') }}" />
+                <x-search-form action="{{ $searchRoute }}" />
             </div>
 
             <div class="header-right">
@@ -31,7 +37,7 @@
             
             <nav class="mobile-nav">
                 <div class="mobile-nav-inner">
-                    <x-search-form action="{{ route('items.index') }}" />
+                    <x-search-form action="{{ $searchRoute }}" />
                     <x-header-nav />
                 </div>
             </nav>

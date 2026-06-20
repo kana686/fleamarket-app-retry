@@ -8,5 +8,9 @@
             value="{{ request()->query('keyword') }}"
             class="search-input"
         >
+
+        @if(request()->routeIs('mypage'))
+            <input type="hidden" name="tab" value="{{ request()->query('tab', 'sell') }}">
+        @endif
     </form>
 </div>
