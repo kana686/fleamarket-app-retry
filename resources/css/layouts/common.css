@@ -1,8 +1,9 @@
 .register-container,
 .login-container,
-.profile-edit-container {
+.profile-edit-container,
+.item-sell-container {
     width: 90%;
-    max-width: 600px;
+    max-width: 680px;
     margin: 60px auto;
 }
 

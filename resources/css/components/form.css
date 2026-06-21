@@ -1,19 +1,44 @@
-.form-group {
+.form-group,
+.field-group {
     margin-bottom: 20px;
 }
 
-
-.form-group label {
+.form-group label,
+.field-group label,
+.section-label {
     display: block;
     margin-bottom: 5px;
     font-size: 16px;
     font-weight: bold;
 }
 
-.form-control {
+.form-control,
+.form-select,
+.form-textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
-    box-sizing: border-box; 
+    box-sizing: border-box;
     border-radius: 3px;
+}
+
+.form-textarea {
+    height: 125px;
+    resize: vertical;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 10px;
+    color: #555;
+}
+
+.has-icon {
+    padding-left: 30px;
 }

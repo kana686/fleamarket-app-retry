@@ -14,3 +14,27 @@
   height: 100%;
   object-fit: cover;
 }
+
+.hidden-input {
+    display: none;
+}
+
+.sell-image-upload-area {
+    width: 680px;
+    height: 186px;
+    border: 1px dashed #5F5F5F;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    background-color: #fcfcfc;
+}
+
+.sell-image-upload-area button {
+    color: #ff5555;
+    border: 1px solid #ff5555;
+    padding: 10px 20px;
+    background: white;
+    cursor: pointer;
+}
