@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SearchItemRequest;
 use App\Services\ItemService;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Category;
+use App\Models\Condition;
+use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
@@ -32,7 +35,10 @@ class ItemController extends Controller
 
     public function create() // 表示確認用
     {
-        return view('items.sell');
+        $categories = Category::all();
+        $conditions = Condition::all();
+
+        return view('items.sell', compact('categories', 'conditions'));
     }
 
     public function store(Request $request) // 表示確認用
