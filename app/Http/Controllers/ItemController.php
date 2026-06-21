@@ -29,4 +29,14 @@ class ItemController extends Controller
 
         return view('items.index', compact('items'));
     }
+
+    public function create() // 表示確認用
+    {
+        return view('sell.create');
+    }
+
+    public function store(Request $request) // 表示確認用
+    {
+        return redirect()->route('mypage')->with('message', '登録が完了しました！');
+    }
 }
