@@ -1,0 +1,24 @@
+.category-input {
+    display: none;
+}
+
+.category-label {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+
+.category-label:hover {
+    background-color: #f3f4f6;
+}
+
+.category-input:checked + .category-label {
+    background-color: #ef4444;
+    color: white;
+    border-color: #ef4444;
+}
