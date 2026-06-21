@@ -1,14 +1,19 @@
-@props(['name', 'label' => null, 'type' => 'text', 'value' => ''])
+@props(['name', 'label' => null, 'type' => 'text', 'value' => '', 'icon' => null])
 
 <div class="form-group">
     @if(isset($label))
         <label>{{ $label }}</label>
     @endif
 
-    <input type="{{ $type }}" 
-           name="{{ $name }}" 
-           class="form-control @error($name) is-invalid @enderror" 
-           value="{{ old($name, $value) }}">
+    <div class="input-wrapper">
+        @if($icon)
+            <span class="input-icon">{{ $icon }}</span>
+        @endif
+        <input type="{{ $type }}"
+            name="{{ $name }}"
+            class="form-control {{ $icon ? 'has-icon' : '' }} @error($name) is-invalid @enderror"
+            value="{{ old($name, $value) }}">
+    </div>
 
     @error($name)
         <span class="error-message">{{ $message }}</span>
