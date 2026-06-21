@@ -10,10 +10,6 @@ Route::get('/items/{item}', function ($item) { // 遷移確認用仮ルート
     return '商品詳細画面へ遷移成功！ (受け取ったID: '.$item.')';
 })->name('items.show');
 
-Route::get('/sell', function () { // 遷移確認用仮ルート
-    return '出品画面への遷移確認';
-})->name('sell');
-
 Route::controller(RegisteredUserController::class)->group(function () {
     Route::get('/register', 'create')->name('register.create');
     Route::post('/register', 'store')->name('register.store');
@@ -31,5 +27,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', 'index')->name('mypage');
         Route::get('/profile', 'edit')->name('profile.edit');
         Route::patch('/profile', 'update')->name('profile.update');
+    });
+
+    Route::prefix('sell')->controller(ItemController::class)->group(function () {
+        Route::get('/', 'create')->name('sell.create');
+        Route::post('/', 'store')->name('sell.store');
     });
 });
