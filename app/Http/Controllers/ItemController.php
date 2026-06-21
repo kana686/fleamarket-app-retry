@@ -32,7 +32,7 @@ class ItemController extends Controller
 
     public function create() // 表示確認用
     {
-        return view('sell.create');
+        return view('items.sell');
     }
 
     public function store(Request $request) // 表示確認用
