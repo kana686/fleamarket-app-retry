@@ -3,7 +3,7 @@
 <div class="field-group">
     <label for="{{ $name }}">{{ $label }}</label>
     <select name="{{ $name }}" id="{{ $name }}" class="form-select">
-        <option value="">選択してください</option>
+        <option value="" hidden selected>選択してください</option>
         
         @foreach($options as $option)
             <option 
