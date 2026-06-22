@@ -10,7 +10,7 @@
                 value="{{ $option->id }}" 
                 {{ (old($name, $selected) == $option->id) ? 'selected' : '' }}
             >
-                {{ $option->name }}
+                {{ $option->content }}
             </option>
         @endforeach
     </select>
