@@ -5,7 +5,7 @@
 .category-wrapper {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 36px 20px;
 }
 
 .field-group .category-wrapper .category-label {
