@@ -8,8 +8,9 @@
 .section-label {
     display: block;
     margin-bottom: 5px;
-    font-size: 16px;
+    font-size: 24px;
     font-weight: bold;
+    color: #000000;
 }
 
 .form-control,
@@ -17,9 +18,11 @@
 .form-textarea {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #5F5F5F;
     box-sizing: border-box;
-    border-radius: 3px;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #5F5F5F;
 }
 
 .form-textarea {
@@ -36,7 +39,8 @@
 .input-icon {
     position: absolute;
     left: 10px;
-    color: #555;
+    color: #000000;
+    font-weight: bold;
 }
 
 .has-icon {
