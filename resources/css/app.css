@@ -9,8 +9,10 @@
 
 @import 'components/header.css';
 @import 'components/button.css';
+@import 'components/form-select.css';
 @import 'components/form.css';
 @import 'components/card.css';
+@import 'components/category.css';
 @import 'components/tab.css';
 @import 'components/flash.css';
 @import 'components/ui.css';

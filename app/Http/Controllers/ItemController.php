@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SearchItemRequest;
+use App\Models\Category;
+use App\Models\Condition;
 use App\Services\ItemService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
@@ -28,5 +31,18 @@ class ItemController extends Controller
         $items = $this->itemService->getItems($keyword, $tab);
 
         return view('items.index', compact('items'));
+    }
+
+    public function create() // 表示確認用
+    {
+        $categories = Category::all();
+        $conditions = Condition::all();
+
+        return view('items.sell', compact('categories', 'conditions'));
+    }
+
+    public function store(Request $request) // 表示確認用
+    {
+        return redirect()->route('mypage')->with('message', '登録が完了しました！');
     }
 }

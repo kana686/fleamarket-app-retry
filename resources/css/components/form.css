@@ -1,19 +1,48 @@
-.form-group {
+.form-group,
+.field-group {
     margin-bottom: 20px;
 }
 
-
-.form-group label {
+.form-group label,
+.field-group label,
+.section-label {
     display: block;
     margin-bottom: 5px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.form-control,
+.form-select,
+.form-textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #5F5F5F;
+    box-sizing: border-box;
+    border-radius: 4px;
     font-size: 16px;
+    color: #5F5F5F;
+}
+
+.form-textarea {
+    height: 125px;
+    resize: vertical;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 10px;
+    color: #000000;
     font-weight: bold;
 }
 
-.form-control {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    box-sizing: border-box; 
-    border-radius: 3px;
+.has-icon {
+    padding-left: 30px;
 }

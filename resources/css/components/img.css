@@ -14,3 +14,41 @@
   height: 100%;
   object-fit: cover;
 }
+
+.hidden-input {
+    display: none;
+}
+
+.sell-image-upload-area {
+    width: 680px;
+    height: 186px;
+    border: 1px dashed #5F5F5F;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    background-color: #ffffff;
+    gap: 20px;
+}
+
+.sell-image-upload-area .btn-img {
+    color: #ff5555;
+    background: #ffffff;
+    border: 2px solid #ff5555;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    display: inline-block;
+    cursor: pointer;
+    line-height: 1.25;
+    text-align: center;
+}
+
+.preview-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 4px;
+}
