@@ -11,6 +11,15 @@ class ExhibitionRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        if ($this->has('price')) {
+            $this->merge([
+                'price' => str_replace(',', '', $this->price),
+            ]);
+        }
+    }
+
     public function rules(): array
     {
         return [
