@@ -5,4 +5,8 @@
         <img id="sell-image-preview" class="preview-image" src="#" alt="プレビュー" style="display:none;">
         <x-file-upload-button name="img_url" id="sell-image-input" />
     </label>
+
+    @error('img_url')
+        <span class="error-message">{{ $message }}</span>
+    @enderror
 </div>
