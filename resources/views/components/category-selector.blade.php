@@ -15,7 +15,7 @@
                 name="categories[]"
                 value="{{ $category->id }}"
                 class="category-input"
-            >
+                {{ in_array($category->id, old('categories', [])) ? 'checked' : '' }}>
             <label for="cat-{{ $category->id }}" class="category-label">
                 {{ $category->content }}
             </label>
