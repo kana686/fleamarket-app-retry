@@ -1,4 +1,4 @@
-@props(['name', 'label' => null, 'type' => 'text', 'value' => '', 'icon' => null])
+@props(['name', 'label' => null, 'type' => 'text', 'value' => '', 'icon' => null, 'id' => null])
 
 <div class="form-group">
     @if(isset($label))
@@ -11,6 +11,7 @@
         @endif
         <input type="{{ $type }}"
             name="{{ $name }}"
+            id="{{ $id ?? $name }}"
             class="form-control {{ $icon ? 'has-icon' : '' }} @error($name) is-invalid @enderror"
             value="{{ old($name, $value) }}">
     </div>

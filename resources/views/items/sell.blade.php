@@ -22,7 +22,7 @@
                 <x-input-field name="name" label="商品名" type="text" />
                 <x-input-field name="brand_name" label="ブランド名" type="text" />
                 <x-textarea-field name="description" label="商品の説明" />
-                <x-input-field name="price" label="販売価格" type="text" icon="￥" />
+                <x-input-field name="price" label="販売価格" type="text" icon="￥" id="price-input" />
             </section>
 
             <x-primary-button>出品する</x-primary-button>

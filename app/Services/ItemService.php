@@ -61,6 +61,10 @@ class ItemService
             $data['img_url'] = $path;
         }
 
+        if (isset($data['price'])) {
+            $data['price'] = str_replace(',', '', $data['price']);
+        }
+
         $item = Item::create([
             'user_id' => Auth::id(),
             'condition_id' => $data['condition_id'],
