@@ -9,4 +9,10 @@
     @error('img_url')
         <span class="error-message">{{ $message }}</span>
     @enderror
+
+    @if($errors->any() && !$errors->has('img_url'))
+        <p class="retry-message">
+            ※画像ファイルを再度選択してください
+        </p>
+    @endif
 </div>
