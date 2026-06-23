@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Models\Category;
+use App\Models\Condition;
 use App\Models\Item;
 use Illuminate\Support\Facades\Auth;
 
