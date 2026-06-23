@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ExhibitionRequest;
 use App\Http\Requests\SearchItemRequest;
 use App\Services\ItemService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
