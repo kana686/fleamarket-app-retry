@@ -2,6 +2,11 @@
 
 <div class="field-group">
     <label class="section-label">カテゴリー</label>
+
+    @error('categories')
+        <span class="error-message">{{ $message }}</span>
+    @enderror
+
     <div class="category-wrapper">
         @foreach($categories as $category)
             <input
@@ -10,7 +15,7 @@
                 name="categories[]"
                 value="{{ $category->id }}"
                 class="category-input"
-            >
+                {{ in_array($category->id, old('categories', [])) ? 'checked' : '' }}>
             <label for="cat-{{ $category->id }}" class="category-label">
                 {{ $category->content }}
             </label>
