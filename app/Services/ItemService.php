@@ -48,7 +48,7 @@ class ItemService
 
     public function getItemById($id)
     {
-        return Item::find($id);
+        return Item::withCount(['mylists', 'comments'])->findOrFail($id);
     }
 
     public function getFormData(): array

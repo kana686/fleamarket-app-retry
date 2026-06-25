@@ -36,11 +36,6 @@ class ItemController extends Controller
     {
         $item = $this->itemService->getItemById($id);
 
-        if (! $item) {
-            abort(404);
-        }
-        dd($item);
-
         return view('items.show', compact('item'));
     }
 
