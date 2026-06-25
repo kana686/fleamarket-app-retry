@@ -1,18 +1,18 @@
 .image-wrapper {
-  width: 150px;
-  height: 150px;
-  overflow: hidden;
-  border-radius: 50%;
-  border: 1px solid #ccc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .rounded-circle {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .hidden-input {
@@ -51,4 +51,14 @@
     height: 150px;
     object-fit: cover;
     border-radius: 4px;
+}
+
+.item-image-area {
+    width: 690px;
+}
+
+.product-image-container img {
+    width: 600px;
+    height: 600px;
+    margin: 36px 45px;
 }

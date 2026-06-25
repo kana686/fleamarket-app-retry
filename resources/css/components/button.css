@@ -1,4 +1,5 @@
-.btn-primary {
+.btn-primary,
+.item-detail__purchase-btn {
     width: 100%;
     padding: 12px;
     background-color: #ff5252;
