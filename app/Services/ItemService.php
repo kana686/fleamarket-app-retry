@@ -46,6 +46,11 @@ class ItemService
         return $query->latest()->get();
     }
 
+    public function getItemById($id)
+    {
+        return Item::find($id);
+    }
+
     public function getFormData(): array
     {
         return [
