@@ -8,7 +8,10 @@
             <div class="item-detail__header">
                 <h1 class="item-detail__title">{{ $item->name }}</h1>
                 <div class="item-detail__brand">{{ $item->brand_name }}</div>
-                <div class="item-detail__price">{{ $item->price }}</div>
+                <div class="item-detail__price">
+                    <span class="price-symbol">¥</span>
+                    <span class="price-value">{{ number_format($item->price) }}</span>
+                </div>
 
                 <div class="item-detail__actions">
                     <x-like-button :item="$item" :likesCount="$item->mylists_count" />
