@@ -25,6 +25,29 @@
 
 .item-detail-area {
     width: 690px;
+    padding: 0 60px;
+}
+
+.item-detail__header {
+    text-align: left;
+}
+
+.item-detail__header h1 {
+    text-align: left;
+    font-size: 45px;
+    margin-bottom: 0;
+}
+
+.item-detail__brand {
+    font-size: 20px;
+}
+
+.price-symbol{
+    font-size: 30px;
+}
+
+.price-value {
+    font-size: 45px;
 }
 
 .item-detail__actions {

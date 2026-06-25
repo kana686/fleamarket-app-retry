@@ -7,7 +7,7 @@
     border: none;
     cursor: pointer;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 26px;
     margin-top: 40px;
     border-radius: 3px;
 }
@@ -35,4 +35,10 @@
 .btn-edit:hover {
     background-color: #fff0f0;
     text-decoration: none;
+}
+
+.item-detail__purchase-btn {
+    display: block;
+    text-decoration: none;
+    text-align: center;
 }
