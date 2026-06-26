@@ -33,26 +33,29 @@
 
             <div class="item-detail__info">
                 <h2 class="item-detail__subtitle">商品の情報</h2>
-                <div class="item-detail__category">
+                <div class="item-detail__info-grid">
                     <span class="item-detail__label">カテゴリー</span>
-                    @foreach($item->categories as $category)
-                        <span class="category-label">{{ $category->content }}</span>
-                    @endforeach
-                </div>
+                    <div class="item-detail__values">
+                        @foreach($item->categories as $category)
+                            <span class="category-label">{{ $category->content }}</span>
+                        @endforeach
+                    </div>
 
-                <div class="item-detail__condition">
                     <span class="item-detail__label">商品の状態</span>
-                    <span class="condition-label">{{ $item->condition->content }}</span>
+                    <div class="item-detail__value">
+                        <span class="condition-label">{{ $item->condition->content }}</span>
+                    </div>
+                </div>
             </div>
 
             <div class="item-detail__comments">
-                <h2 class="item-detail__subtitle">コメント(1)</h2>
+                <h2 class="item-detail__subtitle">コメント({{ $item->comments_count }})</h2>
 
                 <div class="item-detail__comment-list">
                 @foreach($item->comments as $comment)
                     <div class="item-detail__comment">
                         <p class="comment-user">{{ $comment->user->name }}</p>
-                        <p class="comment-body">{{ $comment->body }}</p>
+                        <p class="comment-body">{{ $comment->content }}</p>
                     </div>
                 @endforeach
                 </div>
