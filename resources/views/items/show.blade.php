@@ -54,7 +54,13 @@
                 <div class="item-detail__comment-list">
                 @foreach($item->comments as $comment)
                     <div class="item-detail__comment">
-                        <p class="comment-user">{{ $comment->user->name }}</p>
+                        <div class="comment-user-info">
+                            <x-img-field
+                                :src="$comment->user->profile_image_path"
+                                alt="{{ $comment->user->name }}のプロフィール画像"
+                                class="profile-img-small" />
+                            <span class="comment-user">{{ $comment->user->name }}</span>
+                        </div>
                         <p class="comment-body">{{ $comment->content }}</p>
                     </div>
                 @endforeach
