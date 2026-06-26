@@ -15,7 +15,10 @@
                 </div>
 
                 <div class="item-detail__actions">
-                    <x-like-button :item="$item" :likesCount="$item->mylists_count" />
+                    <x-like-button :item="$item"
+                        :likesCount="$item->mylists_count"
+                        :isLiked="$item->mylists->contains('user_id', auth()->id())"
+                    />
                     <x-comment-count :commentsCount="$item->comments_count" />
                 </div>
             </div>
@@ -59,7 +62,8 @@
                             <x-img-field
                                 :src="$comment->user->img_url"
                                 alt="{{ $comment->user->name }}のプロフィール画像"
-                                class="profile-img-small" />
+                                class="profile-img-small"
+                            />
                             <span class="comment-user">{{ $comment->user->name }}</span>
                         </div>
                         <p class="comment-body">{{ $comment->content }}</p>
