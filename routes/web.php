@@ -6,9 +6,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisteredUserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/items/{item}', function ($item) { // 遷移確認用仮ルート
-    return '商品詳細画面へ遷移成功！ (受け取ったID: '.$item.')';
-})->name('items.show');
+Route::get('/purchase/{item}', function ($item) { // 遷移確認用仮ルート
+    return '商品購入画面へ遷移成功！ (受け取ったID: '.$item.')';
+})->name('purchases.checkout');
 
 Route::controller(RegisteredUserController::class)->group(function () {
     Route::get('/register', 'create')->name('register.create');
@@ -20,7 +20,10 @@ Route::controller(AuthenticatedSessionController::class)->group(function () {
     Route::post('/login', 'store')->name('login.store');
 });
 
-Route::get('/', [ItemController::class, 'index'])->name('items.index');
+Route::controller(ItemController::class)->group(function () {
+    Route::get('/', 'index')->name('items.index');
+    Route::get('/items/{item}', 'show')->name('items.show');
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::prefix('mypage')->controller(ProfileController::class)->group(function () {

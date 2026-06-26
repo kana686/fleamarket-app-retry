@@ -32,6 +32,13 @@ class ItemController extends Controller
         return view('items.index', compact('items'));
     }
 
+    public function show($id)
+    {
+        $item = $this->itemService->getItemById($id);
+
+        return view('items.show', compact('item'));
+    }
+
     public function create()
     {
         $data = $this->itemService->getFormData();

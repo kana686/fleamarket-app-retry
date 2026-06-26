@@ -1,4 +1,5 @@
-.btn-primary {
+.btn-primary,
+.item-detail__purchase-btn {
     width: 100%;
     padding: 12px;
     background-color: #ff5252;
@@ -6,13 +7,15 @@
     border: none;
     cursor: pointer;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 26px;
     margin-top: 40px;
     border-radius: 3px;
 }
 
-.btn-primary:hover {
+.btn-primary:hover,
+.item-detail__purchase-btn:hover {
     background-color: #ff6b6b;
+    text-decoration: none;
 }
 
 .btn-img,
@@ -33,5 +36,13 @@
 .btn-img:hover,
 .btn-edit:hover {
     background-color: #fff0f0;
+    text-decoration: none;
+}
+
+.item-detail__purchase-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     text-decoration: none;
 }
