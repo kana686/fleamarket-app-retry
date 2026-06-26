@@ -11,6 +11,7 @@
                 <div class="item-detail__price">
                     <span class="price-symbol">¥</span>
                     <span class="price-value">{{ number_format($item->price) }}</span>
+                    <span class="price-tax">(税込)</span>
                 </div>
 
                 <div class="item-detail__actions">
@@ -56,7 +57,7 @@
                     <div class="item-detail__comment">
                         <div class="comment-user-info">
                             <x-img-field
-                                :src="$comment->user->profile_image_path"
+                                :src="$comment->user->img_url"
                                 alt="{{ $comment->user->name }}のプロフィール画像"
                                 class="profile-img-small" />
                             <span class="comment-user">{{ $comment->user->name }}</span>

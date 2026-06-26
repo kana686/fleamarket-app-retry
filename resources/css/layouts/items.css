@@ -43,7 +43,8 @@
     font-size: 20px;
 }
 
-.price-symbol{
+.price-symbol,
+.price-tax {
     font-size: 30px;
 }
 

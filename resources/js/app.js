@@ -19,7 +19,17 @@ document.addEventListener('DOMContentLoaded', () => {
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    imagePreview.src = e.target.result;
+                    if (imagePreview.tagName === 'DIV') {
+                        const img = document.createElement('img');
+                        img.id = 'profile-image-preview';
+                        img.className = imagePreview.className;
+                        imagePreview.parentNode.replaceChild(img, imagePreview);
+
+                        const newPreview = document.getElementById('profile-image-preview');
+                        newPreview.src = e.target.result;
+                    } else {
+                        imagePreview.src = e.target.result;
+                    }
                 }
                 reader.readAsDataURL(file);
             }
