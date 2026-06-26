@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 .register-container,
 .login-container,
 .profile-edit-container,

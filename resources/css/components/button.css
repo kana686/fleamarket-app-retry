@@ -12,8 +12,10 @@
     border-radius: 3px;
 }
 
-.btn-primary:hover {
+.btn-primary:hover,
+.item-detail__purchase-btn:hover {
     background-color: #ff6b6b;
+    text-decoration: none;
 }
 
 .btn-img,
@@ -38,7 +40,9 @@
 }
 
 .item-detail__purchase-btn {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     text-decoration: none;
-    text-align: center;
 }
