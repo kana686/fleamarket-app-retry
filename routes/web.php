@@ -36,4 +36,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', 'create')->name('sell.create');
         Route::post('/', 'store')->name('sell.store');
     });
+
+    Route::prefix('items')->controller(LikeController::class)->group(function () {
+        Route::post('/{id}/like', 'store')->name('like.store');
+        Route::delete('/{id}/like', 'destroy')->name('like.destroy');
+    });
 });
