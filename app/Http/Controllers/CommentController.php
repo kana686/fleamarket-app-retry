@@ -11,7 +11,7 @@ class CommentController extends Controller
     public function store(CommentRequest $request, Item $item, CommentService $service)
     {
         if (! auth()->check()) {
-            return redirect()->route('login')
+            return redirect()->route('items.show', $item->id)
                 ->with('error', 'コメントするにはログインが必要です。');
         }
 
