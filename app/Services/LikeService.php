@@ -8,7 +8,10 @@ class LikeService
 {
     public function addLike($itemId, $userId)
     {
-        return Mylist::create(['item_id' => $itemId, 'user_id' => $userId]);
+        return Mylist::firstOrCreate([
+            'item_id' => $itemId,
+            'user_id' => $userId
+        ]);
     }
 
     public function removeLike($itemId, $userId)
