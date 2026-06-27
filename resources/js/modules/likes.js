@@ -12,20 +12,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const countSpan = wrapper.querySelector('.js-likes-count');
             const url = wrapper.dataset.url;
             const isLiked = icon.classList.contains('is-liked');
-            const method = isLiked ? 'DELETE' : 'POST';
+            const method = isLiked ? 'delete' : 'post';
 
-            fetch(url, {
+            axios({
                 method: method,
+                url: url,
                 headers: {
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                     'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 },
             })
             .then(response => {
-                if (!response.ok) throw new Error('サーバーエラー');
-                return response.json();
-            })
-            .then(data => {
+                const data = response.data;
                 if (data.status === 'liked') {
                     icon.src = icon.dataset.pink;
                     icon.classList.add('is-liked');
@@ -38,7 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .catch(error => {
                 console.error('通信エラー:', error);
-                alert("エラーが発生しました。時間を置いてからもう一度お試しください。");
+
+                if (error.response && error.response.status === 401) {
+                    alert("いいね機能を使うには、ログインしてください");
+                } else {
+                    alert("エラーが発生しました。時間を置いてからもう一度お試しください");
+                }
             });
         });
     });
