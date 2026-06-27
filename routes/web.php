@@ -42,4 +42,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/{id}/like', 'store')->name('like.store');
         Route::delete('/{id}/like', 'destroy')->name('like.destroy');
     });
+
+    Route::middleware('throttle:10,1')->controller(CommentController::class)->group(function () {
+        Route::post('/{item}/comments', 'store')->name('comments.store');
+    });
 });
