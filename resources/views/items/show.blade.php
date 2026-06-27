@@ -71,7 +71,7 @@
                 @endforeach
                 </div>
 
-                <form action="{{ route('purchases.checkout', ['item' => $item->id]) }}" method="POST" enctype="multipart/form-data" novalidate>
+                <form action="{{ route('comments.store', ['item' => $item->id]) }}" method="POST" novalidate>
                 @csrf
                     <x-textarea-field name="content" label="商品へのコメント" />
                     <x-primary-button>コメントを送信する</x-primary-button>
