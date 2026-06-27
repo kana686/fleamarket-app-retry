@@ -52,7 +52,7 @@
                 </div>
             </div>
 
-            <div class="item-detail__comments">
+            <div class="item-detail__comments" id="comments-section">
                 <h2 class="item-detail__subtitle">コメント({{ $item->comments_count }})</h2>
 
                 <div class="item-detail__comment-list">
