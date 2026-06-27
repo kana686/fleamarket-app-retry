@@ -1,0 +1,12 @@
+.js-like-button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    display: flex;
+}
+
+.js-like-icon {
+    display: block;
+    cursor: pointer;
+}
