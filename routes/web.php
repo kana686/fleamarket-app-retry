@@ -2,9 +2,9 @@
 
 use App\Http\Controllers\AuthenticatedSessionController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisteredUserController;
-use App\Http\Controllers\LikeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/purchase/{item}', function ($item) { // 遷移確認用仮ルート

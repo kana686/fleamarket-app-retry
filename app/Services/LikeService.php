@@ -10,7 +10,7 @@ class LikeService
     {
         return Mylist::firstOrCreate([
             'item_id' => $itemId,
-            'user_id' => $userId
+            'user_id' => $userId,
         ]);
     }
 
