@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? 'COACHTECHフリマ' }}</title>
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
@@ -30,11 +32,11 @@
             <div class="header-right">
                 <x-header-nav />
             </div>
-        
+
             <button class="menu-toggle" aria-label="メニュー開閉">
                 <span></span><span></span><span></span>
             </button>
-            
+
             <nav class="mobile-nav">
                 <div class="mobile-nav-inner">
                     <x-search-form action="{{ $searchRoute }}" />
