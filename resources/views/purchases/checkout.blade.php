@@ -56,7 +56,7 @@
                 <input type="hidden" name="payment_method" value="{{ $paymentMethod }}">
                 <input type="hidden" name="shipping_address" value="{{ $shippingAddress }}">
 
-                <button type="submit" class="purchase-button">購入する</button>
+                <x-primary-button>購入する</x-primary-button>
             </form>
         </div>
     </div>
