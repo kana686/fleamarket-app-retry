@@ -22,4 +22,9 @@ class PurchaseController extends Controller
 
         return view('purchases.checkout', compact('item', 'user', 'shippingAddress', 'paymentMethods', 'paymentMethod'));
     }
+
+    public function store(Request $request)
+    {
+        return redirect()->route('purchases.index')->with('success', '購入が完了しました！');
+    }
 }
