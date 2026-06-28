@@ -20,6 +20,6 @@ class PurchaseController extends Controller
         ];
         $paymentMethod = session('selected_payment_method', 1);
 
-        return view('purchases.checkout', compact('item', 'user', 'shippingAddress', 'paymentMethods'));
+        return view('purchases.checkout', compact('item', 'user', 'shippingAddress', 'paymentMethods', 'paymentMethod'));
     }
 }
