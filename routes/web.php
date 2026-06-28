@@ -43,7 +43,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('purchase')->controller(PurchaseController::class)->group(function () {
         Route::get('/{item}', 'show')->name('purchases.checkout');
-        Route::get('/address/{item}', 'edit')->name('purchases.edit');
+        Route::get('/address/{item}', 'edit')->name('address.edit');
     });
 });
 
