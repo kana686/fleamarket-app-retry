@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class PurchaseController extends Controller
 {
     public function show($item_id)
-{
-    $item = Item::findOrFail($item_id);
-    $user = Auth::user();
+    {
+        $item = Item::findOrFail($item_id);
+        $user = Auth::user();
 
-    return view('purchases.checkout', compact('item', 'user'));
-}
+        return view('purchases.checkout', compact('item', 'user'));
+    }
 }
