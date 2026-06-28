@@ -2,10 +2,13 @@
 
 namespace App\Http\Requests;
 
+use App\Traits\TrimsInput;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ExhibitionRequest extends FormRequest
 {
+    use TrimsInput;
+
     public function authorize(): bool
     {
         return true;

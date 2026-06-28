@@ -15,7 +15,10 @@
                 </div>
 
                 <div class="item-detail__actions">
-                    <x-like-button :item="$item" :likesCount="$item->mylists_count" />
+                    <x-like-button :item="$item"
+                        :likesCount="$item->mylists_count"
+                        :isLiked="$item->mylists->contains('user_id', auth()->id())"
+                    />
                     <x-comment-count :commentsCount="$item->comments_count" />
                 </div>
             </div>
@@ -49,7 +52,7 @@
                 </div>
             </div>
 
-            <div class="item-detail__comments">
+            <div class="item-detail__comments" id="comments-section">
                 <h2 class="item-detail__subtitle">コメント({{ $item->comments_count }})</h2>
 
                 <div class="item-detail__comment-list">
@@ -59,7 +62,8 @@
                             <x-img-field
                                 :src="$comment->user->img_url"
                                 alt="{{ $comment->user->name }}のプロフィール画像"
-                                class="profile-img-small" />
+                                class="profile-img-small"
+                            />
                             <span class="comment-user">{{ $comment->user->name }}</span>
                         </div>
                         <p class="comment-body">{{ $comment->content }}</p>
@@ -67,7 +71,7 @@
                 @endforeach
                 </div>
 
-                <form action="{{ route('purchases.checkout', ['item' => $item->id]) }}" method="POST" enctype="multipart/form-data" novalidate>
+                <form action="{{ route('comments.store', ['item' => $item->id]) }}" method="POST" novalidate>
                 @csrf
                     <x-textarea-field name="content" label="商品へのコメント" />
                     <x-primary-button>コメントを送信する</x-primary-button>
