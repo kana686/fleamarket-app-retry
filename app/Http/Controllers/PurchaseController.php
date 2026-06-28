@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
+use Illuminate\Support\Facades\Auth;
+
 class PurchaseController extends Controller
 {
     public function show($item_id)
