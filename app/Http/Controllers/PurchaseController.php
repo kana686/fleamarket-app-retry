@@ -9,6 +9,11 @@ class PurchaseController extends Controller
         $item = Item::findOrFail($item_id);
         $user = Auth::user();
 
-        return view('purchases.checkout', compact('item', 'user'));
+        $paymentMethods = [
+            1 => 'コンビニ払い',
+            2 => 'クレジット払い',
+        ];
+
+        return view('purchases.checkout', compact('item', 'user', 'paymentMethods'));
     }
 }
