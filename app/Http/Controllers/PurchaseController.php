@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PurchaseRequest;
 use App\Models\Item;
+use App\Services\PurchaseService;
 use Illuminate\Support\Facades\Auth;
 
 class PurchaseController extends Controller
@@ -23,8 +25,10 @@ class PurchaseController extends Controller
         return view('purchases.checkout', compact('item', 'user', 'shippingAddress', 'paymentMethods', 'paymentMethod'));
     }
 
-    public function store(Request $request)
+    public function store(PurchaseRequest $request, PurchaseService $purchaseService, $item_id)
     {
+        $purchaseService->processPurchase($request->validated(), $item_id);
+
         return redirect()->route('purchases.index')->with('success', '購入が完了しました！');
     }
 
