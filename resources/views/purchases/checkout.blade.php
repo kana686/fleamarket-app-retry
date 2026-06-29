@@ -19,6 +19,7 @@
                     name="payment_method"
                     label="支払い方法"
                     :options="$paymentMethods"
+                    labelClass="payment-method-label"
                 />
             </div>
 

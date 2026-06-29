@@ -1,7 +1,9 @@
-@props(['name', 'label', 'options', 'selected' => null, 'id' => null])
+@props(['name', 'label', 'labelClass', 'options', 'selected' => null, 'id' => null])
 
 <div class="field-group">
-    <label for="{{ $id ?? $name }}">{{ $label }}</label>
+    <label for="{{ $id ?? $name }}" class="field-label {{ $labelClass ?? '' }}">
+        {{ $label }}
+    </label>
     <select name="{{ $name }}" id="{{ $id ?? $name }}" class="form-select">
         <option value="" hidden selected>選択してください</option>
 
