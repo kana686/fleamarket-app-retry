@@ -3,26 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PurchaseRequest;
-use App\Models\Item;
 use App\Services\PurchaseService;
-use Illuminate\Support\Facades\Auth;
 
 class PurchaseController extends Controller
 {
-    public function show($item_id)
+    public function show(PurchaseService $purchaseService, $item_id)
     {
-        $item = Item::findOrFail($item_id);
-        $user = Auth::user();
+        $data = $purchaseService->getCheckoutData($item_id);
 
-        $shippingAddress = session('edited_address', $user->address);
-
-        $paymentMethods = [
-            1 => 'コンビニ払い',
-            2 => 'クレジット払い',
-        ];
-        $paymentMethod = session('selected_payment_method', null);
-
-        return view('purchases.checkout', compact('item', 'user', 'shippingAddress', 'paymentMethods', 'paymentMethod'));
+        return view('purchases.checkout', $data);
     }
 
     public function store(PurchaseRequest $request, PurchaseService $purchaseService, $item_id)

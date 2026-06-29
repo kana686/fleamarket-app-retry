@@ -2,11 +2,29 @@
 
 namespace App\Services;
 
+use App\Models\Item;
 use App\Models\Purchase;
 use Illuminate\Support\Facades\Auth;
 
 class PurchaseService
 {
+    public function getCheckoutData($itemId)
+    {
+        $item = Item::findOrFail($itemId);
+        $user = Auth::user();
+
+        return [
+            'item' => $item,
+            'user' => $user,
+            'shippingAddress' => session('edited_address', $user->address),
+            'paymentMethods' => [
+                1 => 'コンビニ払い',
+                2 => 'クレジット払い',
+            ],
+            'paymentMethod' => session('selected_payment_method', null),
+        ];
+    }
+
     public function processPurchase(array $data, $itemId)
     {
         $user = Auth::user();
