@@ -45,6 +45,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/{item}', 'show')->name('purchases.checkout');
         Route::post('/{item}', 'store')->name('purchases.store');
         Route::get('/address/{item}', 'edit')->name('address.edit');
+
+        Route::get('/success/{item}', 'success')->name('purchases.success');
     });
 });
 
