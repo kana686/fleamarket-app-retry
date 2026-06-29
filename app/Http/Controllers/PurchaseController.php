@@ -16,9 +16,15 @@ class PurchaseController extends Controller
 
     public function store(PurchaseRequest $request, PurchaseService $purchaseService, $item_id)
     {
-        $purchaseService->processPurchase($request->validated(), $item_id);
+        try {
+            $purchaseService->processPurchase($request->validated(), $item_id);
 
-        return redirect()->route('purchases.index')->with('success', '購入が完了しました！');
+            return redirect()->route('purchases.index')->with('success', '購入が完了しました！');
+
+        } catch (\Exception $e) {
+
+            return back()->withErrors(['error' => $e->getMessage()])->withInput();
+        }
     }
 
     public function edit($item_id)
