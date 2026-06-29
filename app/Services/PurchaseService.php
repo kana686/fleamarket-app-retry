@@ -6,8 +6,7 @@ use App\Models\Item;
 use App\Models\Purchase;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use Stripe\Charge;
+use Stripe\Checkout\Session;
 use Stripe\Stripe;
 
 class PurchaseService
@@ -29,29 +28,44 @@ class PurchaseService
         ];
     }
 
+    public function handlePurchase(array $data, $item)
+    {
+        if ($data['payment_method'] == 2) {
+            return $this->createStripeSession($item->id, $item->price);
+        }
+
+        $this->processPurchase($data, $item->id);
+
+        return null;
+    }
+
+    public function createStripeSession($itemId, $price)
+    {
+        Stripe::setApiKey(config('services.stripe.secret'));
+
+        $session = Session::create([
+            'payment_method_types' => ['card'],
+            'line_items' => [[
+                'price_data' => [
+                    'currency' => 'jpy',
+                    'product_data' => ['name' => '商品購入'],
+                    'unit_amount' => $price,
+                ],
+                'quantity' => 1,
+            ]],
+            'mode' => 'payment',
+            'success_url' => route('purchases.success', ['item_id' => $itemId]),
+            'cancel_url' => route('purchases.show', ['item_id' => $itemId]),
+        ]);
+
+        return $session->url;
+    }
+
     public function processPurchase(array $data, $itemId)
     {
         return DB::transaction(function () use ($data, $itemId) {
             $user = Auth::user();
             $shippingAddress = session('edited_address', $user->address);
-
-            $item = Item::findOrFail($itemId);
-            $price = $item->price;
-
-            if ($data['payment_method'] == 2) {
-                try {
-                    Stripe::setApiKey(config('services.stripe.secret'));
-
-                    Charge::create([
-                        'amount' => $data['price'],
-                        'currency' => 'jpy',
-                        'source' => $data['stripeToken'],
-                    ]);
-                } catch (\Exception $e) {
-                    Log::error('決済失敗: '.$e->getMessage());
-                    throw new \Exception('決済処理に失敗しました。カード情報を確認してください。');
-                }
-            }
 
             Purchase::create([
                 'item_id' => $itemId,
