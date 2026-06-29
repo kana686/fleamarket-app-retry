@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (input) {
         input.addEventListener('blur', function () {
             let value = this.value.replace(/,/g, '');
-            
+
             if (!isNaN(value) && value !== "") {
                 this.value = Number(value).toLocaleString();
             }
