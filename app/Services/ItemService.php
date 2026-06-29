@@ -55,7 +55,7 @@ class ItemService
     {
         return [
             'categories' => Category::all(),
-            'conditions' => Condition::all(),
+            'conditions' => Condition::all()->pluck('content', 'id'),
         ];
     }
 

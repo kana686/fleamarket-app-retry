@@ -17,12 +17,12 @@
     justify-content: flex-start;
 }
 
-.header-center { 
-    justify-content: center; 
+.header-center {
+    justify-content: center;
 }
 
-.header-right { 
-    justify-content: flex-end; 
+.header-right {
+    justify-content: flex-end;
     gap: 40px;
 }
 
@@ -59,7 +59,7 @@
     border: none;
     padding: 0;
     cursor: pointer;
-    
+
     color: #fff;
     font-size: 24px;
     font-family: inherit;
@@ -90,10 +90,10 @@
 }
 
 .btn-sell:hover {
-    background-color: transparent; 
+    background-color: transparent;
     color: #fff;
     border: 1px solid #fff;
-    text-decoration: none; 
+    text-decoration: none;
 }
 
 .menu-toggle {
@@ -107,7 +107,7 @@
     .header-center {
         display: none;
     }
-    
+
     .header-right {
         display: none;
     }

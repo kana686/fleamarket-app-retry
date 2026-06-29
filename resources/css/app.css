@@ -2,10 +2,10 @@
 
 @import 'base/base.css';
 
-@import 'layouts/layout.css';
 @import 'layouts/common.css';
 @import 'layouts/items.css';
 @import 'layouts/profile.css';
+@import 'layouts/purchase.css';
 
 @import 'components/header.css';
 @import 'components/button.css';

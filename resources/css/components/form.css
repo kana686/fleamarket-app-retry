@@ -4,7 +4,7 @@
 }
 
 .form-group label,
-.field-group label,
+.field-group .field-label,
 .section-label {
     display: block;
     margin-bottom: 5px;

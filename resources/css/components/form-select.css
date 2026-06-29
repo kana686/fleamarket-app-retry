@@ -13,3 +13,14 @@
     outline: none;
     border-color: #888;
 }
+
+.purchase-payment-info .field-group .form-select {
+    width: 265px;
+    height: 31px;
+    display: block;
+    font-size: 16px;
+    padding: 0 10px;
+    line-height: 35px;
+    margin-left: 96px;
+    margin-bottom: 64px;
+}
