@@ -30,21 +30,17 @@ class PurchaseService
 
     public function handlePurchase(array $data, $item)
     {
-        if ($data['payment_method'] == 2) {
-            return $this->createStripeSession($item->id, $item->price);
-        }
-
-        $this->processPurchase($data, $item->id);
-
-        return null;
+        return $this->createStripeSession($item->id, $item->price, $data['payment_method']);
     }
 
-    public function createStripeSession($itemId, $price)
+    public function createStripeSession($itemId, $price, $paymentMethod)
     {
         Stripe::setApiKey(config('services.stripe.secret'));
 
+        $methods = ($paymentMethod == 1) ? ['konbini'] : ['card'];
+
         $session = Session::create([
-            'payment_method_types' => ['card'],
+            'payment_method_types' => $methods,
             'line_items' => [[
                 'price_data' => [
                     'currency' => 'jpy',

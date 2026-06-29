@@ -20,22 +20,20 @@ class PurchaseController extends Controller
         $item = Item::findOrFail($item_id);
         $data = $request->validated();
 
-        try {
-            $redirectUrl = $purchaseService->handlePurchase($data, $item);
+        session(['temp_payment_method' => $data['payment_method']]);
 
-            if ($redirectUrl) {
-                return redirect()->away($redirectUrl);
-            }
+        $redirectUrl = $purchaseService->handlePurchase($data, $item);
 
-            return redirect()->route('items.index')->with('success', '購入が完了しました！');
-        } catch (\Exception $e) {
-            return back()->withErrors(['error' => $e->getMessage()])->withInput();
-        }
+        return redirect()->away($redirectUrl);
     }
 
     public function success(PurchaseService $purchaseService, $item_id)
     {
-        $purchaseService->processPurchase(['payment_method' => 2], $item_id);
+        $paymentMethod = session('temp_payment_method', 2);
+
+        $purchaseService->processPurchase(['payment_method' => $paymentMethod], $item_id);
+
+        session()->forget('temp_payment_method');
 
         return redirect()->route('items.index')->with('success', '決済が完了し、購入が確定しました！');
     }
