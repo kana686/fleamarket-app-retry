@@ -27,4 +27,9 @@ class PurchaseController extends Controller
     {
         return redirect()->route('purchases.index')->with('success', '購入が完了しました！');
     }
+
+    public function edit($item_id)
+    {
+        return '送付先住所変更画面に遷移成功！';
+    }
 }
