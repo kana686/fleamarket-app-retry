@@ -21,6 +21,12 @@
                     :options="$paymentMethods"
                     labelClass="payment-method-label"
                 />
+
+                @error('payment_method')
+                    <div class="text-danger">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
 
             <div class="purchase-address-info">
@@ -37,6 +43,13 @@
                     <p>{{ $user->address }}</p>
                     <p>{{ $user->building }}</p>
                 </div>
+
+                @error('post_code')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+                @error('address')
+                    <div class="text-danger" >{{ $message }}</div>
+                @enderror
             </div>
         </div>
 
