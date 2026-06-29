@@ -18,7 +18,7 @@ class PurchaseController extends Controller
             1 => 'コンビニ払い',
             2 => 'クレジット払い',
         ];
-        $paymentMethod = session('selected_payment_method', 1);
+        $paymentMethod = session('selected_payment_method', null);
 
         return view('purchases.checkout', compact('item', 'user', 'shippingAddress', 'paymentMethods', 'paymentMethod'));
     }
