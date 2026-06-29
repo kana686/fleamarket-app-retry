@@ -38,7 +38,8 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    overflow: hidden;
+    overflow: visible;
+    position: relative;
     box-shadow: -4px 0 4px -2px rgba(0, 0, 0, 0.25),
                  4px 0 4px -2px rgba(0, 0, 0, 0.25);
 }
@@ -70,4 +71,23 @@
     color: #333;
     position: relative;
     z-index: 3;
+}
+
+.sold-ribbon {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    background-color: #ef4444;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+
+    width: 100px;
+    padding: 3px 0;
+
+    transform: translateX(30%) translateY(20%) rotate(45deg);
+
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    z-index: 10;
 }
