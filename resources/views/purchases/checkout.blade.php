@@ -74,6 +74,10 @@
             <form action="{{ route('purchases.store', $item->id) }}" method="POST">
                 @csrf
 
+                @error('item_id')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+
                 <input type="hidden" name="payment_method" value="{{ $paymentMethod }}">
                 <input type="hidden" name="shipping_address" value="{{ $shippingAddress }}">
 
