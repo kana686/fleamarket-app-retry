@@ -13,3 +13,8 @@
     outline: none;
     border-color: #888;
 }
+
+.field-group label.payment-method-label {
+    font-size: 20px;
+    margin: 33px auto;
+}

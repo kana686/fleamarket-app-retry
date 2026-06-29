@@ -27,11 +27,6 @@
     border-bottom: 1px solid #ccc;
 }
 
-.purchase-payment-info label {
-    font-size: 20px;
-    font-weight: bold;
-}
-
 .purchase-address-info {
     border-bottom: 1px solid #ccc;
     padding-bottom: 40px;
