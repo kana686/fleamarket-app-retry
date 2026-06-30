@@ -47,7 +47,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/address/{item}', 'edit')->name('address.edit');
 
-        Route::get('/address/{item}', 'edit')->name('address.edit');
+        Route::get('/address/{item}', 'edit')->name('purchase.address.edit');
         Route::patch('/address/{item}', 'update')->name('purchase.address.update');
 
         Route::get('/success/{item}', 'success')->name('purchases.success');
