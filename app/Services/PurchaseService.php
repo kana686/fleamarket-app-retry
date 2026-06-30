@@ -54,10 +54,13 @@ class PurchaseService
             'cancel_url' => route('purchases.show', ['item_id' => $itemId]),
         ]);
 
-        return $session->url;
+        return [
+            'url' => $session->url,
+            'id' => $session->id,
+        ];
     }
 
-    public function processPurchase(array $data, $itemId)
+    public function processPurchase(array $data, $itemId, $stripeSessionId)
     {
         return DB::transaction(function () use ($data, $itemId) {
             $user = Auth::user();
@@ -69,6 +72,8 @@ class PurchaseService
                 'payment_method' => $data['payment_method'],
                 'post_code' => $user->post_code,
                 'address' => $shippingAddress,
+                'stripe_session_id' => $stripeSessionId,
+                'status' => 'completed',
             ]);
 
             session()->forget(['edited_address', 'selected_payment_method']);
