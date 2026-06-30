@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PurchaseRequest;
 use App\Models\Item;
 use App\Services\PurchaseService;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PurchaseController extends Controller
 {
@@ -25,23 +27,15 @@ class PurchaseController extends Controller
         session([
             'temp_payment_method' => $data['payment_method'],
             'temp_stripe_session_id' => $stripeSession['id'],
+            'temp_purchase_data' => $data,
         ]);
 
         return redirect()->away($stripeSession['url']);
     }
 
-    public function success(PurchaseService $purchaseService, $item_id)
+    public function success(Request $request, PurchaseService $purchaseService, $item_id)
     {
-        $paymentMethod = session('temp_payment_method', 2);
-        $stripeSessionId = session('temp_stripe_session_id');
-
-        $purchaseService->processPurchase(
-            ['payment_method' => $paymentMethod],
-            $item_id,
-            $stripeSessionId
-        );
-
-        session()->forget(['temp_payment_method', 'temp_stripe_session_id']);
+        $purchaseService->finalizePurchase($item_id, Auth::user());
 
         return redirect()->route('items.index')->with('success', '決済が完了し、購入が確定しました！');
     }
