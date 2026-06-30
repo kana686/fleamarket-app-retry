@@ -52,8 +52,8 @@ class PurchaseService
                 'quantity' => 1,
             ]],
             'mode' => 'payment',
-            'success_url' => route('purchases.success', ['item_id' => $itemId]),
-            'cancel_url' => route('purchases.show', ['item_id' => $itemId]),
+            'success_url' => route('purchases.success', ['item' => $itemId]),
+            'cancel_url' => route('purchases.checkout', ['item' => $itemId]),
         ]);
 
         return [
