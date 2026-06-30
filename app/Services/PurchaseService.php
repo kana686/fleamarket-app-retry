@@ -19,7 +19,9 @@ class PurchaseService
         return [
             'item' => $item,
             'user' => $user,
+            'shippingPostCode' => session('edited_post_code', $user->post_code),
             'shippingAddress' => session('edited_address', $user->address),
+            'shippingBuilding' => session('edited_building', $user->building),
             'paymentMethods' => [
                 1 => 'コンビニ払い',
                 2 => 'クレジット払い',
@@ -62,21 +64,28 @@ class PurchaseService
 
     public function processPurchase(array $data, $itemId, $stripeSessionId)
     {
-        return DB::transaction(function () use ($data, $itemId) {
+        return DB::transaction(function () use ($data, $itemId, $stripeSessionId) {
             $user = Auth::user();
-            $shippingAddress = session('edited_address', $user->address);
 
             Purchase::create([
                 'item_id' => $itemId,
                 'user_id' => $user->id,
                 'payment_method' => $data['payment_method'],
-                'post_code' => $user->post_code,
-                'address' => $shippingAddress,
+                'post_code' => $data['post_code'],
+                'address' => $data['address'],
+                'building' => $data['building'] ?? null,
                 'stripe_session_id' => $stripeSessionId,
                 'status' => 'completed',
             ]);
 
-            session()->forget(['edited_address', 'selected_payment_method']);
+            session()->forget([
+                'edited_post_code',
+                'edited_address',
+                'edited_building',
+                'selected_payment_method',
+                'temp_payment_method',
+                'temp_stripe_session_id',
+            ]);
         });
     }
 }

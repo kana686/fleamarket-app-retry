@@ -17,6 +17,7 @@ class PurchaseRequest extends FormRequest
             'payment_method' => ['required', 'integer', 'in:1,2'],
             'post_code' => ['required', 'string', 'max:8', 'regex:/^\d{3}-\d{4}$/'],
             'address' => ['required', 'string', 'max:255'],
+            'building' => ['nullable', 'string', 'max:255'],
             'item_id' => ['required', 'exists:items,id'],
         ];
     }
