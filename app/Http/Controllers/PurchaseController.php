@@ -20,20 +20,28 @@ class PurchaseController extends Controller
         $item = Item::findOrFail($item_id);
         $data = $request->validated();
 
-        session(['temp_payment_method' => $data['payment_method']]);
+        $stripeSession = $purchaseService->handlePurchase($data, $item);
 
-        $redirectUrl = $purchaseService->handlePurchase($data, $item);
+        session([
+            'temp_payment_method' => $data['payment_method'],
+            'temp_stripe_session_id' => $stripeSession['id'],
+        ]);
 
-        return redirect()->away($redirectUrl);
+        return redirect()->away($stripeSession['url']);
     }
 
     public function success(PurchaseService $purchaseService, $item_id)
     {
         $paymentMethod = session('temp_payment_method', 2);
+        $stripeSessionId = session('temp_stripe_session_id');
 
-        $purchaseService->processPurchase(['payment_method' => $paymentMethod], $item_id);
+        $purchaseService->processPurchase(
+            ['payment_method' => $paymentMethod],
+            $item_id,
+            $stripeSessionId
+        );
 
-        session()->forget('temp_payment_method');
+        session()->forget(['temp_payment_method', 'temp_stripe_session_id']);
 
         return redirect()->route('items.index')->with('success', '決済が完了し、購入が確定しました！');
     }

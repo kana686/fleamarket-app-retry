@@ -78,8 +78,10 @@
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
 
+                <input type="hidden" name="item_id" value="{{ $item->id }}">
                 <input type="hidden" name="payment_method" value="{{ $paymentMethod }}">
-                <input type="hidden" name="shipping_address" value="{{ $shippingAddress }}">
+                <input type="hidden" name="post_code" value="{{ $user->post_code }}">
+                <input type="hidden" name="address" value="{{ $user->address }}">
 
                 <x-primary-button>購入する</x-primary-button>
             </form>
