@@ -44,4 +44,14 @@ class PurchaseController extends Controller
     {
         return '送付先住所変更画面に遷移成功！';
     }
+
+    public function simulateKonbiniSuccess(PurchaseService $purchaseService, $item_id)
+    {
+        session(['temp_payment_method' => 1]);
+        session(['temp_stripe_session_id' => 'test_konbini_'.uniqid()]);
+
+        $purchaseService->finalizePurchase($item_id, Auth::user());
+
+        return redirect()->route('items.index')->with('success', '【テスト用】コンビニ決済完了シミュレーションを実行しました！');
+    }
 }
