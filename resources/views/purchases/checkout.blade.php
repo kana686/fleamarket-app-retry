@@ -34,7 +34,7 @@
                 <div class="purchase-address-info">
                     <div class="purchase-address-info__header">
                         <span class="purchase-address-info__title">配送先</span>
-                        <a href="{{ route('address.edit', $item->id) }}"
+                        <a href="{{ route('purchases.address.edit', $item->id) }}"
                             class="purchase-address-info__change-link">
                             変更する
                         </a>
