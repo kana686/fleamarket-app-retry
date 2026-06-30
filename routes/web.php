@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AuthenticatedSessionController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ItemController;
@@ -45,12 +46,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/{item}', 'show')->name('purchases.checkout');
         Route::post('/{item}', 'store')->name('purchases.store');
 
-        Route::get('/address/{item}', 'edit')->name('address.edit');
-
-        Route::get('/address/{item}', 'edit')->name('purchase.address.edit');
-        Route::patch('/address/{item}', 'update')->name('purchase.address.update');
-
         Route::get('/success/{item}', 'success')->name('purchases.success');
+    });
+
+    Route::prefix('purchase/address')->controller(AddressController::class)->group(function () {
+        Route::get('/{item}', 'edit')->name('purchase.address.edit');
+        Route::patch('/{item}', 'update')->name('purchase.address.update');
     });
 });
 
