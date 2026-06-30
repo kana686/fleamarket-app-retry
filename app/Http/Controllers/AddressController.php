@@ -10,12 +10,12 @@ class AddressController extends Controller
     {
         $itemId = $item->id;
 
-        $address = (object) session("temp_address.{$item_id}", [
+        $address = (object) session("temp_address.{$itemId}", [
             'post_code' => auth()->user()->post_code,
             'address' => auth()->user()->address,
             'building' => auth()->user()->building,
         ]);
 
-        return view('purchases.address.edit', compact('item', 'address'));
+        return view('purchases.address', compact('item', 'address'));
     }
 }
