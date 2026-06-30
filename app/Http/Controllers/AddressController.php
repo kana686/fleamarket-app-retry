@@ -18,4 +18,9 @@ class AddressController extends Controller
 
         return view('purchases.address', compact('item', 'address'));
     }
+
+    public function update(Request $request, Item $item)
+    {
+        return redirect()->route('purchases.checkout', $item->id);
+    }
 }
