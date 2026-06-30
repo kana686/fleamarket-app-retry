@@ -20,6 +20,8 @@ class Purchase extends Model
         'address',
         'building',
         'payment_method',
+        'stripe_session_id',
+        'status',
     ];
 
     public static function getPaymentMethodLabels(): array
