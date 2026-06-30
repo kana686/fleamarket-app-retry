@@ -50,8 +50,8 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::prefix('purchase/address')->controller(AddressController::class)->group(function () {
-        Route::get('/{item}', 'edit')->name('purchase.address.edit');
-        Route::patch('/{item}', 'update')->name('purchase.address.update');
+        Route::get('/{item}', 'edit')->name('purchases.address.edit');
+        Route::patch('/{item}', 'update')->name('purchases.address.update');
     });
 });
 
