@@ -45,9 +45,17 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/{item}', 'show')->name('purchases.checkout');
         Route::post('/{item}', 'store')->name('purchases.store');
         Route::get('/address/{item}', 'edit')->name('address.edit');
+
+        Route::get('/success/{item}', 'success')->name('purchases.success');
     });
 });
 
 Route::middleware('throttle:10,1')->controller(CommentController::class)->group(function () {
     Route::post('/{item}/comments', 'store')->name('comments.store');
 });
+
+// Route::post('/stripe/webhook', [WebhookController::class, 'handle']);
+
+if (config('app.debug')) {
+    Route::get('/test/konbini-success/{item_id}', [PurchaseController::class, 'simulateKonbiniSuccess']);
+}

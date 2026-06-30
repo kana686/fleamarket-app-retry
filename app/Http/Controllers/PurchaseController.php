@@ -2,34 +2,56 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PurchaseRequest;
 use App\Models\Item;
+use App\Services\PurchaseService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PurchaseController extends Controller
 {
-    public function show($item_id)
+    public function show(PurchaseService $purchaseService, $item_id)
     {
-        $item = Item::findOrFail($item_id);
-        $user = Auth::user();
+        $data = $purchaseService->getCheckoutData($item_id);
 
-        $shippingAddress = session('edited_address', $user->address);
-
-        $paymentMethods = [
-            1 => 'コンビニ払い',
-            2 => 'クレジット払い',
-        ];
-        $paymentMethod = session('selected_payment_method', null);
-
-        return view('purchases.checkout', compact('item', 'user', 'shippingAddress', 'paymentMethods', 'paymentMethod'));
+        return view('purchases.checkout', $data);
     }
 
-    public function store(Request $request)
+    public function store(PurchaseRequest $request, PurchaseService $purchaseService, $item_id)
     {
-        return redirect()->route('purchases.index')->with('success', '購入が完了しました！');
+        $item = Item::findOrFail($item_id);
+        $data = $request->validated();
+
+        $stripeSession = $purchaseService->handlePurchase($data, $item);
+
+        session([
+            'temp_payment_method' => $data['payment_method'],
+            'temp_stripe_session_id' => $stripeSession['id'],
+            'temp_purchase_data' => $data,
+        ]);
+
+        return redirect()->away($stripeSession['url']);
+    }
+
+    public function success(Request $request, PurchaseService $purchaseService, $item_id)
+    {
+        $purchaseService->finalizePurchase($item_id, Auth::user());
+
+        return redirect()->route('items.index')->with('success', '決済が完了し、購入が確定しました！');
     }
 
     public function edit($item_id)
     {
         return '送付先住所変更画面に遷移成功！';
+    }
+
+    public function simulateKonbiniSuccess(PurchaseService $purchaseService, $item_id)
+    {
+        session(['temp_payment_method' => 1]);
+        session(['temp_stripe_session_id' => 'test_konbini_'.uniqid()]);
+
+        $purchaseService->finalizePurchase($item_id, Auth::user());
+
+        return redirect()->route('items.index')->with('success', '【テスト用】コンビニ決済完了シミュレーションを実行しました！');
     }
 }

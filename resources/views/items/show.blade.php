@@ -24,10 +24,14 @@
             </div>
 
             <div class="item-detail__purchase">
-                <a href="{{ route('purchases.checkout', ['item' => $item->id]) }}"
-                    class="item-detail__purchase-btn">
-                    購入手続きへ
-                </a>
+                @if ($item->purchases()->exists())
+                    <div class="item-detail__sold-label">Sold</div>
+                @else
+                    <a href="{{ route('purchases.checkout', ['item' => $item->id]) }}"
+                        class="item-detail__purchase-btn">
+                        購入手続きへ
+                    </a>
+                @endif
             </div>
 
             <div class="item-detail__description">
