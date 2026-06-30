@@ -2,9 +2,9 @@
     <x-slot name="title">送付先住所変更画面</x-slot>
 
     <div class="shipping-address-edit-container">
-        <h1 class="shipping-address-edit__title">プロフィール設定</h1>
+        <h1 class="shipping-address-edit__title">住所の変更</h1>
 
-        <form action="{{ route('purchase.address.update', $item->id) }}" method="POST" novalidate>
+        <form action="{{ route('purchases.address.update', $item->id) }}" method="POST" novalidate>
         @csrf
         @method('PATCH')
 
