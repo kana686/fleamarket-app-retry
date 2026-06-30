@@ -40,11 +40,6 @@ class PurchaseController extends Controller
         return redirect()->route('items.index')->with('success', '決済が完了し、購入が確定しました！');
     }
 
-    public function edit($item_id)
-    {
-        return '送付先住所変更画面に遷移成功！';
-    }
-
     public function simulateKonbiniSuccess(PurchaseService $purchaseService, $item_id)
     {
         session(['temp_payment_method' => 1]);
