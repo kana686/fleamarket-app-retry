@@ -5,7 +5,8 @@
 .register-container,
 .login-container,
 .profile-edit-container,
-.item-sell-container {
+.item-sell-container,
+.shipping-address-edit-container {
     width: 90%;
     max-width: 680px;
     margin: 60px auto;
