@@ -67,6 +67,10 @@ class PurchaseService
         return DB::transaction(function () use ($data, $itemId, $stripeSessionId) {
             $user = Auth::user();
 
+            $status = ($data['payment_method'] == Purchase::PAYMENT_METHOD_CONVENIENCE)
+                ? Purchase::STATUS_PENDING
+                : Purchase::STATUS_COMPLETED;
+
             Purchase::create([
                 'item_id' => $itemId,
                 'user_id' => $user->id,
@@ -75,7 +79,7 @@ class PurchaseService
                 'address' => $data['address'],
                 'building' => $data['building'] ?? null,
                 'stripe_session_id' => $stripeSessionId,
-                'status' => 'completed',
+                'status' => '$status',
             ]);
 
             session()->forget([
