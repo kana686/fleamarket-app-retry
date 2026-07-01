@@ -58,9 +58,3 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware('throttle:10,1')->controller(CommentController::class)->group(function () {
     Route::post('/{item}/comments', 'store')->name('comments.store');
 });
-
-// Route::post('/stripe/webhook', [WebhookController::class, 'handle']);
-
-if (config('app.debug')) {
-    Route::get('/test/konbini-success/{item_id}', [PurchaseController::class, 'simulateKonbiniSuccess']);
-}

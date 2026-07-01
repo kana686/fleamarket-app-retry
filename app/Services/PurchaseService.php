@@ -39,10 +39,12 @@ class PurchaseService
     {
         Stripe::setApiKey(config('services.stripe.secret'));
 
+        $user = Auth::user();
         $methods = ($paymentMethod == 1) ? ['konbini'] : ['card'];
 
         $session = Session::create([
             'payment_method_types' => $methods,
+            'customer_email' => $user->email,
             'line_items' => [[
                 'price_data' => [
                     'currency' => 'jpy',
@@ -67,6 +69,10 @@ class PurchaseService
         return DB::transaction(function () use ($data, $itemId, $stripeSessionId) {
             $user = Auth::user();
 
+            $status = ($data['payment_method'] == Purchase::PAYMENT_METHOD_CONVENIENCE)
+                ? Purchase::STATUS_PENDING
+                : Purchase::STATUS_COMPLETED;
+
             Purchase::create([
                 'item_id' => $itemId,
                 'user_id' => $user->id,
@@ -75,7 +81,7 @@ class PurchaseService
                 'address' => $data['address'],
                 'building' => $data['building'] ?? null,
                 'stripe_session_id' => $stripeSessionId,
-                'status' => 'completed',
+                'status' => $status,
             ]);
 
             session()->forget([
@@ -85,30 +91,40 @@ class PurchaseService
                 'selected_payment_method',
                 'temp_payment_method',
                 'temp_stripe_session_id',
+                'temp_purchase_data',
             ]);
         });
     }
 
-    public function finalizePurchase($item_id, $user)
+    public function handleStripeWebhook($sessionId, $eventType)
     {
-        $addressData = [
-            'post_code' => session('edited_post_code', $user->post_code),
-            'address' => session('edited_address', $user->address),
-            'building' => session('edited_building', $user->building),
-            'payment_method' => session('temp_payment_method', 2),
-        ];
+        return DB::transaction(function () use ($sessionId, $eventType) {
+            $purchase = Purchase::where('stripe_session_id', $sessionId)->first();
 
-        $stripeSessionId = session('temp_stripe_session_id');
+            if (! $purchase) {
 
-        $this->processPurchase($addressData, $item_id, $stripeSessionId);
+                return false;
+            }
 
-        session()->forget([
-            'temp_payment_method',
-            'temp_stripe_session_id',
-            'edited_post_code',
-            'edited_address',
-            'edited_building',
-            'selected_payment_method',
-        ]);
+            if ($purchase->payment_method != Purchase::PAYMENT_METHOD_CONVENIENCE && $eventType === 'checkout.session.completed') {
+                $purchase->update(['status' => Purchase::STATUS_COMPLETED]);
+
+                return true;
+            }
+
+            if ($purchase->payment_method == Purchase::PAYMENT_METHOD_CONVENIENCE) {
+                if ($eventType === 'checkout.session.completed') {
+
+                    return true;
+                }
+                if ($eventType === 'checkout.session.async_payment_succeeded') {
+                    $purchase->update(['status' => Purchase::STATUS_COMPLETED]);
+
+                    return true;
+                }
+            }
+
+            return true;
+        });
     }
 }

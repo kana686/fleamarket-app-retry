@@ -97,7 +97,15 @@
     DB_PASSWORD=password
     ```
 
-    ※stripe実装後追記
+    また、Stripeを使用する場合は、`.env`に以下の項目を追加してください。
+
+    ```
+    STRIPE_KEY=pk_test_...
+    STRIPE_SECRET=sk_test_...
+    STRIPE_WEBHOOK_SECRET=whsec_...
+    ```
+
+    ※ これらの値は Stripeダッシュボード の「開発者」>「APIキー」および「Webhook」から取得できます。
 
     <details>
     <summary><b>※推奨設定：エイリアスの登録</b></summary>
@@ -196,7 +204,39 @@
     sail npm run dev
     ```
 
-8.  テストの実行とカバレッジの確認
+8.  Stripe CLI の導入
+    ローカル環境で Webhook をテストするために、Stripe CLI のインストールを推奨します。
+
+    **インストール**
+    macOS (Homebrew)の場合
+
+    ```
+    brew install stripe/stripe-cli/stripe
+    ```
+
+    Windows (Scoop)の場合
+
+    ```
+    scoop bucket add stripe https://github.com/stripe/stripe-cli.git
+    scoop install stripe
+    ```
+
+    (※ Scoopが未インストールの場合、Scoop公式サイト を参照してください)
+
+    **ログイン**
+
+    ```
+    stripe login
+    ```
+
+    Webhook の待ち受け（ローカル開発用）
+    アプリケーションの起動中、以下のコマンドを実行することで、Stripe からの Webhook をローカルサーバーへ転送できます。
+
+    ```
+    stripe listen --forward-to http://localhost/stripe/webhook
+    ```
+
+9.  テストの実行とカバレッジの確認
     **テストの実行**
     開発中の機能が正常に動作しているかを確認するために、以下のコマンドでテストを実行できます。
 
@@ -225,7 +265,6 @@
 - PHP 8.2
 - Laravel 10.x
 - Laravel Fortify (認証)
-- Laravel Lang (言語対応)
 
 ### データベース
 
@@ -242,9 +281,16 @@
 - **Laravel Pint:** PHPコードスタイル校正
 - **Prettier:** フロントエンドコード整形
 
-### 決済システム
+### 決済システム(stripe)
 
-- Stripe / Laravel Cashier: 決済・サブスクリプション管理
+本アプリケーションではStripeを用いた決済機能を実装しています。
+
+- **Stripe PHP SDK:** 決済処理の実行基盤
+- **Stripe API:** 決済セッション管理
+- **Stripe Webhooks:** コンビニ決済等の非同期処理のステータス同期
+- **Stripe CLI:** ローカル環境での Webhook テスト・検証用
+
+※ Stripeの実装には API Key および Webhook Secret が必要です。
 
 **開発環境URL**: http://localhost
 
