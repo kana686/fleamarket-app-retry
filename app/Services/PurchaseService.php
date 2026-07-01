@@ -115,4 +115,19 @@ class PurchaseService
             'selected_payment_method',
         ]);
     }
+
+    public function handleStripeWebhook($sessionId)
+    {
+        return DB::transaction(function () use ($sessionId) {
+            $purchase = Purchase::where('stripe_session_id', $sessionId)->first();
+
+            if ($purchase) {
+                $purchase->update(['status' => Purchase::STATUS_COMPLETED]);
+
+                return true;
+            }
+
+            return false;
+        });
+    }
 }
