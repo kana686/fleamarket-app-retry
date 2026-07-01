@@ -13,6 +13,10 @@ class Purchase extends Model
 
     const PAYMENT_METHOD_CREDIT = 2;
 
+    const STATUS_PENDING = 'pending';
+
+    const STATUS_COMPLETED = 'completed';
+
     protected $fillable = [
         'item_id',
         'user_id',
