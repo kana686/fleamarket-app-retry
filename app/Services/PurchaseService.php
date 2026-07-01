@@ -79,7 +79,7 @@ class PurchaseService
                 'address' => $data['address'],
                 'building' => $data['building'] ?? null,
                 'stripe_session_id' => $stripeSessionId,
-                'status' => '$status',
+                'status' => $status,
             ]);
 
             session()->forget([
