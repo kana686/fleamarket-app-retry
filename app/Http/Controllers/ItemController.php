@@ -6,7 +6,6 @@ use App\Http\Requests\ExhibitionRequest;
 use App\Http\Requests\SearchItemRequest;
 use App\Services\ItemService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
@@ -22,10 +21,6 @@ class ItemController extends Controller
         $validated = $request->validated();
         $keyword = $validated['keyword'] ?? null;
         $tab = $validated['tab'] ?? 'recommend';
-
-        if ($tab === 'mylist' && ! Auth::check()) {
-            return redirect()->route('login.create');
-        }
 
         $items = $this->itemService->getItems($keyword, $tab);
 
