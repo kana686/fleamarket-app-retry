@@ -9,7 +9,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('purchases', function (Blueprint $table) {
-            $table->tinyInteger('payment_method')->nullable()->after('id');
+            $table->tinyInteger('payment_method')->after('id');
         });
     }
 
