@@ -96,43 +96,35 @@ class PurchaseService
         });
     }
 
-    public function finalizePurchase($item_id, $user)
+    public function handleStripeWebhook($sessionId, $eventType)
     {
-        $addressData = [
-            'post_code' => session('edited_post_code', $user->post_code),
-            'address' => session('edited_address', $user->address),
-            'building' => session('edited_building', $user->building),
-            'payment_method' => session('temp_payment_method', 2),
-        ];
-
-        $stripeSessionId = session('temp_stripe_session_id');
-
-        $this->processPurchase($addressData, $item_id, $stripeSessionId);
-
-        session()->forget([
-            'temp_payment_method',
-            'temp_stripe_session_id',
-            'edited_post_code',
-            'edited_address',
-            'edited_building',
-            'selected_payment_method',
-        ]);
-    }
-
-    public function handleStripeWebhook($sessionId)
-    {
-        return DB::transaction(function () use ($sessionId) {
+        return DB::transaction(function () use ($sessionId, $eventType) {
             $purchase = Purchase::where('stripe_session_id', $sessionId)->first();
 
-            if ($purchase) {
-                if ($purchase->status !== Purchase::STATUS_COMPLETED) {
-                    $purchase->update(['status' => Purchase::STATUS_COMPLETED]);
-                }
+            if (! $purchase) {
+
+                return false;
+            }
+
+            if ($purchase->payment_method != Purchase::PAYMENT_METHOD_CONVENIENCE && $eventType === 'checkout.session.completed') {
+                $purchase->update(['status' => Purchase::STATUS_COMPLETED]);
 
                 return true;
             }
 
-            return false;
+            if ($purchase->payment_method == Purchase::PAYMENT_METHOD_CONVENIENCE) {
+                if ($eventType === 'checkout.session.completed') {
+
+                    return true;
+                }
+                if ($eventType === 'checkout.session.async_payment_succeeded') {
+                    $purchase->update(['status' => Purchase::STATUS_COMPLETED]);
+
+                    return true;
+                }
+            }
+
+            return true;
         });
     }
 }
