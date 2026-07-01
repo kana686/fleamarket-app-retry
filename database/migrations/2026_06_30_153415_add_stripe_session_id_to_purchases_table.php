@@ -9,19 +9,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('purchases', function (Blueprint $table) {
-            Schema::table('purchases', function (Blueprint $table) {
-                $table->string('stripe_session_id')->nullable()->after('address');
-                $table->string('status')->default('pending')->after('stripe_session_id');
-            });
+            $table->string('stripe_session_id')->nullable()->after('address');
+            $table->string('status')->default('pending')->after('stripe_session_id');
         });
     }
 
     public function down(): void
     {
         Schema::table('purchases', function (Blueprint $table) {
-            Schema::table('purchases', function (Blueprint $table) {
-                $table->dropColumn(['stripe_session_id', 'status']);
-            });
+            $table->dropColumn(['stripe_session_id', 'status']);
         });
     }
 };
