@@ -23,10 +23,6 @@ class ItemController extends Controller
         $keyword = $validated['keyword'] ?? null;
         $tab = $validated['tab'] ?? 'recommend';
 
-        if ($tab === 'mylist' && ! Auth::check()) {
-            return redirect()->route('login.create');
-        }
-
         $items = $this->itemService->getItems($keyword, $tab);
 
         return view('items.index', compact('items'));
