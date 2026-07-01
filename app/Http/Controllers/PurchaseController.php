@@ -6,7 +6,6 @@ use App\Http\Requests\PurchaseRequest;
 use App\Models\Item;
 use App\Services\PurchaseService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class PurchaseController extends Controller
 {
@@ -24,29 +23,13 @@ class PurchaseController extends Controller
 
         $stripeSession = $purchaseService->handlePurchase($data, $item);
 
-        session([
-            'temp_payment_method' => $data['payment_method'],
-            'temp_stripe_session_id' => $stripeSession['id'],
-            'temp_purchase_data' => $data,
-        ]);
+        $purchaseService->processPurchase($data, $item_id, $stripeSession['id']);
 
         return redirect()->away($stripeSession['url']);
     }
 
     public function success(Request $request, PurchaseService $purchaseService, $item_id)
     {
-        $purchaseService->finalizePurchase($item_id, Auth::user());
-
-        return redirect()->route('items.index')->with('success', '決済が完了し、購入が確定しました！');
-    }
-
-    public function simulateKonbiniSuccess(PurchaseService $purchaseService, $item_id)
-    {
-        session(['temp_payment_method' => 1]);
-        session(['temp_stripe_session_id' => 'test_konbini_'.uniqid()]);
-
-        $purchaseService->finalizePurchase($item_id, Auth::user());
-
-        return redirect()->route('items.index')->with('success', '【テスト用】コンビニ決済完了シミュレーションを実行しました！');
+        return redirect()->route('items.index')->with('success', '決済手続きを受け付けました。');
     }
 }

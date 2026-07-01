@@ -89,31 +89,9 @@ class PurchaseService
                 'selected_payment_method',
                 'temp_payment_method',
                 'temp_stripe_session_id',
+                'temp_purchase_data',
             ]);
         });
-    }
-
-    public function finalizePurchase($item_id, $user)
-    {
-        $addressData = [
-            'post_code' => session('edited_post_code', $user->post_code),
-            'address' => session('edited_address', $user->address),
-            'building' => session('edited_building', $user->building),
-            'payment_method' => session('temp_payment_method', 2),
-        ];
-
-        $stripeSessionId = session('temp_stripe_session_id');
-
-        $this->processPurchase($addressData, $item_id, $stripeSessionId);
-
-        session()->forget([
-            'temp_payment_method',
-            'temp_stripe_session_id',
-            'edited_post_code',
-            'edited_address',
-            'edited_building',
-            'selected_payment_method',
-        ]);
     }
 
     public function handleStripeWebhook($sessionId)
@@ -122,7 +100,9 @@ class PurchaseService
             $purchase = Purchase::where('stripe_session_id', $sessionId)->first();
 
             if ($purchase) {
-                $purchase->update(['status' => Purchase::STATUS_COMPLETED]);
+                if ($purchase->status !== Purchase::STATUS_COMPLETED) {
+                    $purchase->update(['status' => Purchase::STATUS_COMPLETED]);
+                }
 
                 return true;
             }
