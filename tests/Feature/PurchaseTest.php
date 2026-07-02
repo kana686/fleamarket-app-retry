@@ -31,6 +31,7 @@ class PurchaseTest extends TestCase
             'item_id' => $item->id,
             'stripe_session_id' => $sessionId,
             'status' => Purchase::STATUS_PENDING,
+            'payment_method' => 2,
         ]);
 
         $payload = [
@@ -42,6 +43,31 @@ class PurchaseTest extends TestCase
 
         $this->postJson(route('webhooks.stripe'), $payload)
             ->assertStatus(200);
+
+        $this->assertEquals(Purchase::STATUS_COMPLETED, $purchase->fresh()->status);
+    }
+
+    /** @test */
+    public function コンビニ払いでも支払い完了通知で購入が完了する()
+    {
+        $sessionId = 'test_convenience_id';
+        $purchase = Purchase::factory()->create([
+            'payment_method' => 1,
+            'status' => Purchase::STATUS_PENDING,
+            'stripe_session_id' => $sessionId,
+        ]);
+
+        $this->postJson(route('webhooks.stripe'), [
+            'type' => 'checkout.session.completed',
+            'data' => ['object' => ['id' => $sessionId]],
+        ]);
+
+        $this->assertEquals(Purchase::STATUS_PENDING, $purchase->fresh()->status);
+
+        $this->postJson(route('webhooks.stripe'), [
+            'type' => 'checkout.session.async_payment_succeeded',
+            'data' => ['object' => ['id' => $sessionId]],
+        ]);
 
         $this->assertEquals(Purchase::STATUS_COMPLETED, $purchase->fresh()->status);
     }
