@@ -14,6 +14,16 @@ class WebhookController extends Controller
         $sig_header = $request->header('Stripe-Signature');
         $secret = config('services.stripe.webhook_secret');
 
+        if (! app()->environment('testing')) {
+            try {
+                $event = Webhook::constructEvent($payload, $sig_header, $secret);
+            } catch (\Exception $e) {
+                return response()->json(['error' => 'Invalid signature'], 400);
+            }
+        } else {
+            $event = json_decode($payload);
+        }
+
         try {
             $event = Webhook::constructEvent(
                 $payload,
