@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\Category;
 use App\Models\Condition;
+use Illuminate\Database\Seeder;
 
 class MasterDataSeeder extends Seeder
 {
