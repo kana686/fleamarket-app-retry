@@ -193,7 +193,21 @@
     sail artisan migrate:fresh --seed
     ```
 
-7.  フロントエンドの準備
+7.  ストレージリンクの作成
+    画像を表示させるために、ストレージへのシンボリックリンクを作成します。
+
+    ```
+    sail artisan storage:link
+    ```
+
+    ※注意: `sail artisan storage:link` を実行した際、「The [public/storage] link already exists.」というエラーが出た場合は、既にリンクが作成済みですのでそのまま次のステップに進んでください。
+
+8.  テスト用アカウント
+    環境構築後、すぐに動作確認ができるよう、以下のテスト用アカウントが自動生成されます。ログイン機能の確認にご使用ください。
+    メールアドレス: test@example.com
+    パスワード: password
+
+9.  フロントエンドの準備
     パッケージをインストールし、開発用ビルドを実行します。
 
     ```bash
@@ -204,7 +218,7 @@
     sail npm run dev
     ```
 
-8.  Stripe CLI の導入
+10. Stripe CLI の導入
     ローカル環境で Webhook をテストするために、Stripe CLI のインストールを推奨します。
 
     **インストール**
@@ -236,7 +250,7 @@
     stripe listen --forward-to http://localhost/stripe/webhook
     ```
 
-9.  テストの実行とカバレッジの確認
+11. テストの実行とカバレッジの確認
     **テストの実行**
     開発中の機能が正常に動作しているかを確認するために、以下のコマンドでテストを実行できます。
 
