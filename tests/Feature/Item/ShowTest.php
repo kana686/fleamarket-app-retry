@@ -43,4 +43,20 @@ class ShowTest extends TestCase
         $response->assertSee($comment->content);
         $response->assertSee($comment->user->name);
     }
+
+    /** @test */
+    public function 複数選択されたカテゴリがすべて表示される()
+    {
+        $categories = Category::all()->take(2);
+
+        $item = Item::factory()->create();
+        $item->categories()->sync($categories->pluck('id')->toArray());
+
+        $response = $this->get(route('items.show', $item->id));
+
+        $response->assertStatus(200);
+        foreach ($categories as $category) {
+            $response->assertSee($category->content);
+        }
+    }
 }
