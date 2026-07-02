@@ -24,17 +24,6 @@ class WebhookController extends Controller
             $event = json_decode($payload);
         }
 
-        try {
-            $event = Webhook::constructEvent(
-                $payload,
-                $sig_header,
-                $secret
-            );
-        } catch (\Exception $e) {
-
-            return response()->json(['error' => 'Invalid signature'], 400);
-        }
-
         $successEvents = ['checkout.session.completed', 'checkout.session.async_payment_succeeded'];
 
         if (in_array($event->type, $successEvents)) {
