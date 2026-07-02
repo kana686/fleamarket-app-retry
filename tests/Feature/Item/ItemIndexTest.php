@@ -3,6 +3,7 @@
 namespace Tests\Feature\Item;
 
 use App\Models\Item;
+use App\Models\Purchase;
 use App\Models\User;
 use Database\Seeders\ItemSeeder;
 use Database\Seeders\MasterDataSeeder;
@@ -45,12 +46,8 @@ class ItemIndexTest extends TestCase
         $item = Item::factory()->create();
 
         $buyer = User::factory()->create();
-        $item->purchases()->create([
+        Purchase::factory()->for($item)->create([
             'user_id' => $buyer->id,
-            'post_code' => '123-4567',
-            'address' => '東京都渋谷区',
-            'payment_method' => 1,
-            'status' => 'completed',
         ]);
 
         $response = $this->get(route('items.index'));
