@@ -3,6 +3,7 @@
 namespace Tests\Feature\Item;
 
 use App\Models\Item;
+use App\Models\Mylist;
 use App\Models\Purchase;
 use App\Models\User;
 use Database\Seeders\ItemSeeder;
@@ -71,5 +72,37 @@ class ItemIndexTest extends TestCase
 
         $response->assertDontSee($myItem->name);
         $response->assertSee($otherItem->name);
+    }
+
+    /** @test */
+    public function 商品名で部分一致検索ができる()
+    {
+        $targetItem = Item::factory()->create(['name' => '美味しい時計']);
+        $otherItem = Item::factory()->create(['name' => 'おいしいお皿']);
+
+        $response = $this->get(route('items.index', ['keyword' => '時計']));
+
+        $response->assertSee('美味しい時計');
+        $response->assertDontSee('おいしいお皿');
+    }
+
+    /** @test */
+    public function 検索状態がマイリストでも保持されている()
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $keyword = '時計';
+        $item = Item::factory()->create(['name' => '高級時計']);
+        Mylist::factory()->create(['user_id' => $user->id, 'item_id' => $item->id]);
+
+        $response = $this->get(route('items.index', [
+            'tab' => 'mylist',
+            'keyword' => $keyword,
+        ]));
+
+        $response->assertSee('value="'.$keyword.'"', false);
+
+        $response->assertSee('高級時計');
     }
 }
