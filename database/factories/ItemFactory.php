@@ -22,6 +22,19 @@ class ItemFactory extends Factory
         ];
     }
 
+    public function SpecificData(): self
+    {
+        return $this->state(fn (array $attributes) => [
+            'user_id' => User::factory(),
+            'condition_id' => 1,
+            'name' => 'HDD',
+            'price' => 5000,
+            'brand_name' => '西芝',
+            'description' => '高速で信頼性の高いハードディスク',
+            'img_url' => 'HDD-Hard-Disk.jpg',
+        ]);
+    }
+
     public function configure()
     {
         return $this->afterCreating(function (Item $item) {
