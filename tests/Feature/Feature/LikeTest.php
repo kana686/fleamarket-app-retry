@@ -5,12 +5,19 @@ namespace Tests\Feature\Feature;
 use App\Models\Item;
 use App\Models\Mylist;
 use App\Models\User;
+use Database\Seeders\MasterDataSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class LikeTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->seed(MasterDataSeeder::class);
+    }
 
     /** @test */
     public function いいねアイコン押下でログインユーザーはいいねを登録できる()
