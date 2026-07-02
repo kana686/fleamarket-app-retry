@@ -17,7 +17,7 @@ class MasterDataSeeder extends Seeder
 
         $conditions = ['良好', '目立った傷や汚れなし', 'やや傷や汚れあり', '状態が悪い'];
         foreach ($conditions as $conditionName) {
-            Condition::updateOrCreate(['content' => $categoryName]);
+            Condition::updateOrCreate(['content' => $conditionName]);
         }
     }
 }
