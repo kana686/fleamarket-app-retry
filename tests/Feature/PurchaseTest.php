@@ -28,12 +28,15 @@ class PurchaseTest extends TestCase
             'status' => Purchase::STATUS_PENDING,
         ]);
 
-        $this->postJson(route('webhooks.stripe'), [
+        $payload = [
             'type' => 'checkout.session.completed',
             'data' => [
                 'object' => ['id' => 'cs_test_123'],
             ],
-        ])->assertStatus(200);
+        ];
+
+        $this->postJson(route('webhooks.stripe'), $payload)
+            ->assertStatus(200);
 
         $this->assertEquals(Purchase::STATUS_COMPLETED, $purchase->fresh()->status);
     }
