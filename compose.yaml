@@ -62,6 +62,13 @@ services:
     depends_on:
       - mysql
 
+  selenium:
+    image: selenium/standalone-chromium:latest
+    networks:
+      - sail
+    volumes:
+      - "/dev/shm:/dev/shm"
+
 networks:
   sail:
     driver: bridge

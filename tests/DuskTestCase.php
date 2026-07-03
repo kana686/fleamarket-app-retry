@@ -13,9 +13,6 @@ abstract class DuskTestCase extends BaseTestCase
 {
     use CreatesApplication;
 
-    /**
-     * Prepare for Dusk test execution.
-     */
     #[BeforeClass]
     public static function prepare(): void
     {
@@ -24,9 +21,6 @@ abstract class DuskTestCase extends BaseTestCase
         }
     }
 
-    /**
-     * Create the RemoteWebDriver instance.
-     */
     protected function driver(): RemoteWebDriver
     {
         $options = (new ChromeOptions)->addArguments(collect([
@@ -39,6 +33,8 @@ abstract class DuskTestCase extends BaseTestCase
                 '--headless=new',
             ]);
         })->all());
+
+        $url = env('DUSK_DRIVER_URL', static::runningInSail() ? 'http://selenium:4444' : 'http://localhost:9515');
 
         return RemoteWebDriver::create(
             $_ENV['DUSK_DRIVER_URL'] ?? env('DUSK_DRIVER_URL') ?? 'http://localhost:9515',
