@@ -32,7 +32,7 @@ class Purchase extends Model
     {
         return [
             self::PAYMENT_METHOD_CONVENIENCE => 'コンビニ払い',
-            self::PAYMENT_METHOD_CREDIT => 'クレジット払い',
+            self::PAYMENT_METHOD_CREDIT => 'カード支払い',
         ];
     }
 

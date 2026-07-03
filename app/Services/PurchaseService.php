@@ -24,7 +24,7 @@ class PurchaseService
             'shippingBuilding' => session('edited_building', $user->building),
             'paymentMethods' => [
                 1 => 'コンビニ払い',
-                2 => 'クレジット払い',
+                2 => 'カード支払い',
             ],
             'paymentMethod' => session('selected_payment_method', null),
         ];
