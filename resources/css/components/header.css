@@ -103,6 +103,39 @@
     display: none;
 }
 
+@media (min-width: 950px) and (max-width: 1400px) {
+    .header {
+        padding: 22px 20px;
+    }
+
+    .header-left {
+        padding: 12px 20px;
+    }
+
+    .header-center {
+        width: 45%;
+    }
+
+    .search-input {
+        width: 35vw;
+        max-width: 500px;
+        height: 40px;
+        font-size: clamp(16px, 1.8vw, 24px);
+    }
+
+    .header-nav {
+        gap: 20px;
+    }
+
+    .nav-link, .logout-btn {
+        font-size: clamp(16px, 1.8vw, 24px);
+    }
+
+    .btn-sell {
+        padding: 4px 10px;
+        font-size: clamp(14px, 1.5vw, 20px);
+    }
+}
 @media screen and (max-width: 950px) {
     .header-center {
         display: none;

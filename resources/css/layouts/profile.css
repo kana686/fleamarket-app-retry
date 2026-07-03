@@ -15,7 +15,7 @@
 }
 
 
-.profile-info {
+.profile-info-container {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -24,4 +24,28 @@
 
 .user-name {
     margin: 0;
+}
+
+@media (min-width: 768px) and (max-width: 1400px) {
+    .profile-section {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .profile-info-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 950px) {
+    .btn-edit {
+        font-size: 1px;
+        padding: 4px 8px;
+    }
 }
