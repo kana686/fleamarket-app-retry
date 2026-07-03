@@ -30,7 +30,7 @@
 }
 
 .sell-image-upload-area {
-    width: 680px;
+    max-width: 680px;
     height: 186px;
     border: 1px dashed #5F5F5F;
     display: flex;
@@ -64,7 +64,7 @@
 }
 
 .item-image-area {
-    width: 690px;
+    max-width: 690px;
 }
 
 .product-image-container img {

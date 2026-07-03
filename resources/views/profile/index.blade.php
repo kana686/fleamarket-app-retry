@@ -2,7 +2,7 @@
     <div class="profile-section">
         <x-img-field :src="$user->img_url" />
 
-        <div class="profile-info">
+        <div class="profile-info-container">
             <h1 class="user-name">{{ $user->name }}</h1>
             <a href="{{ route('profile.edit') }}" class="btn-edit">プロフィールを編集</a>
         </div>
