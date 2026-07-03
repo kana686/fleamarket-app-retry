@@ -18,6 +18,8 @@ abstract class DuskTestCase extends BaseTestCase
     {
         if (! static::runningInSail()) {
             static::startChromeDriver(['--port=9515']);
+
+            static::prepareDatabase();
         }
     }
 
