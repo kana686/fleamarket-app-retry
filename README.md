@@ -147,16 +147,16 @@
 
     </details>
 
-4.  アプリケーションキーの生成
-
-    ```bash
-    sail artisan key:generate
-    ```
-
-5.  Dockerコンテナの起動
+4.  Dockerコンテナの起動
 
     ```bash
     sail up -d
+    ```
+
+5.  アプリケーションキーの生成
+
+    ```bash
+    sail artisan key:generate
     ```
 
 6.  データベースの構築
@@ -217,8 +217,14 @@
     ```bash
     # パッケージのインストール
     sail npm install
+    ```
 
     # 開発用ビルド（変更監視モード）
+
+    開発用サーバーが起動するとターミナルが占有されます。
+    ターミナルの「新しいウィンドウ（またはタブ）」を開き、プロジェクトのディレクトリに移動してから下記コマンドを実行してください。
+
+    ```bash
     sail npm run dev
     ```
 
