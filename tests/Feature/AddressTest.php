@@ -44,4 +44,28 @@ class AddressTest extends TestCase
             ->assertSee('999-9999')
             ->assertSee('大阪府大阪市');
     }
+
+    /** @test */
+    public function 購入した商品に送付先住所が紐づいて登録される()
+    {
+        $user = User::factory()->create();
+        $item = Item::factory()->create();
+
+        $response = $this->actingAs($user)
+            ->post(route('purchases.store', $item->id), [
+                'payment_method' => 1,
+                'item_id' => $item->id,
+                'post_code' => '999-9999',
+                'address' => '大阪府大阪市',
+                'building' => 'テストマンション',
+            ]);
+
+        $this->assertDatabaseHas('purchases', [
+            'user_id' => $user->id,
+            'item_id' => $item->id,
+            'post_code' => '999-9999',
+            'address' => '大阪府大阪市',
+            'building' => 'テストマンション',
+        ]);
+    }
 }
