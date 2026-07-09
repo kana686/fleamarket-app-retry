@@ -70,10 +70,14 @@
     ```
 
 2.  環境変数の設定
-    `.env.example`をコピーして`.env`を作成します。
+    通常環境用と、ブラウザテスト（Dusk）環境用の2種類の設定ファイルを作成します。
 
     ```bash
+    # 通常環境用
     cp .env.example .env
+
+    # テスト環境用（Dusk等で使用）
+    cp .env.testing.example .env.testing
     ```
 
     ※ 必要に応じて .env 内のデータベース設定が以下と一致しているか確認してください。
@@ -154,9 +158,14 @@
     ```
 
 5.  アプリケーションキーの生成
+    通常環境用と、テスト環境用の両方のキーを生成します。
 
     ```bash
+    # 通常環境用
     sail artisan key:generate
+
+    # テスト環境用
+    sail artisan key:generate --env=testing
     ```
 
 6.  データベースの構築
@@ -228,6 +237,13 @@
     sail npm run dev
     ```
 
+    **テスト用ビルド（物理ファイル生成）**
+    ブラウザテスト（Dusk）を実行する前や、Viteサーバーを立ち上げずに画面を確認したい場合は、必ず以下を実行してアセットをコンパイルしてください。
+
+    ```bash
+    sail npm run build
+    ```
+
 10. Stripe CLI の導入
     ローカル環境で Webhook をテストするために、Stripe CLI のインストールを推奨します。
 
@@ -272,6 +288,13 @@
 
     ```bash
     sail test --coverage
+    ```
+
+    **ブラウザテスト（Laravel Dusk）の実行**
+    Duskテストを実行する際は、事前に`sail npm run build`（または`host: '0.0.0.0'`設定付きの `sail npm run dev`）が起動していることを確認した上で、以下のコマンドを実行してください。
+
+    ```bash
+    sail dusk
     ```
 
 ## プロジェクト設定
