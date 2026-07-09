@@ -4,16 +4,19 @@ namespace Tests\Feature;
 
 use App\Models\Category;
 use App\Models\Condition;
+use App\Models\Item;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class ItemExhibitionTest extends TestCase
 {
     use RefreshDatabase;
 
+    #[Test]
     public function 出品商品情報が正しく保存されること(): void
     {
         Storage::fake('public');
@@ -53,7 +56,7 @@ class ItemExhibitionTest extends TestCase
             'category_id' => $category->id,
         ]);
 
-        $item = \App\Models\Item::first();
+        $item = Item::first();
         Storage::disk('public')->assertExists($item->img_url);
     }
 }

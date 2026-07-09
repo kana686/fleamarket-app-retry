@@ -30,16 +30,16 @@ class PaymentMethodTest extends DuskTestCase
 
         $this->actingAs($buyer);
 
-        $this->browse(function (Browser $browser) use ($buyer, $item) {
+        $this->browse(function (Browser $browser) use ($item) {
             $browser->visit(route('purchases.checkout', $item->id))
-                    ->waitFor('#payment-method-select', 10);
+                ->waitFor('#payment-method-select', 10);
 
             $browser->click('#payment-method-select')
-                    ->select('payment_method', 'カード支払い')
-                    ->script("document.getElementById('payment-method-select').dispatchEvent(new Event('change'));");
+                ->select('payment_method', 'カード支払い')
+                ->script("document.getElementById('payment-method-select').dispatchEvent(new Event('change'));");
 
             $browser->waitForText('カード支払い', 10)
-                    ->assertSeeIn('#payment-method-display', 'カード支払い');
+                ->assertSeeIn('#payment-method-display', 'カード支払い');
         });
     }
 }
