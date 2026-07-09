@@ -6,7 +6,7 @@
 
 - 会員登録/ログイン済みユーザー：商品の閲覧・出品・購入が可能です。
 - 未ログインユーザー：商品の閲覧が可能です。
-- **GitHub URL:** https://github.com/kana686/fleamarket-app.git
+- **GitHub URL:** https://github.com/kana686/fleamarket-app-retry.git
 
 ## 目次
 
@@ -66,24 +66,10 @@
     ```bash
     mkdir -p [任意のディレクトリ名]
     cd [任意のディレクトリ名]
-    git clone https://github.com/kana686/fleamarket-app.git .
+    git clone https://github.com/kana686/fleamarket-app-retry.git .
     ```
 
-2.  依存パッケージのインストール
-
-    Composerを使用してライブラリをインストールします。
-
-    ```bash
-    docker run --rm \
-        -u "$(id -u):$(id -g)" \
-        -v "$(pwd):/var/www/html" \
-        -w /var/www/html \
-        -e COMPOSER_CACHE_DIR=/tmp/composer_cache \
-        laravelsail/php82-composer:latest \
-        composer install
-    ```
-
-3.  環境変数の設定
+2.  環境変数の設定
     `.env.example`をコピーして`.env`を作成します。
 
     ```bash
@@ -110,6 +96,20 @@
     ```
 
     ※ これらの値は Stripeダッシュボード の「開発者」>「APIキー」および「Webhook」から取得できます。
+
+3.  依存パッケージのインストール
+
+    Composerを使用してライブラリをインストールします。
+
+    ```bash
+    docker run --rm \
+        -u "$(id -u):$(id -g)" \
+        -v "$(pwd):/var/www/html" \
+        -w /var/www/html \
+        -e COMPOSER_CACHE_DIR=/tmp/composer_cache \
+        laravelsail/php84-composer:latest \
+        composer install
+    ```
 
     <details>
     <summary><b>※推奨設定：エイリアスの登録</b></summary>
@@ -286,8 +286,8 @@
 
 ### バックエンド
 
-- PHP 8.2
-- Laravel 10.x
+- PHP 8.4
+- Laravel 12.62
 - Laravel Fortify (認証)
 
 ### データベース
