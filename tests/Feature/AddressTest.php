@@ -6,6 +6,7 @@ use App\Models\Item;
 use App\Models\User;
 use Database\Seeders\MasterDataSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class AddressTest extends TestCase
@@ -18,7 +19,7 @@ class AddressTest extends TestCase
         $this->seed(MasterDataSeeder::class);
     }
 
-    /** @test */
+    #[Test]
     public function 住所を変更するとセッションに保存されて購入画面に反映される()
     {
         $user = User::factory()->create();
@@ -45,7 +46,7 @@ class AddressTest extends TestCase
             ->assertSee('大阪府大阪市');
     }
 
-    /** @test */
+    #[Test]
     public function 購入した商品に送付先住所が紐づいて登録される()
     {
         $user = User::factory()->create();

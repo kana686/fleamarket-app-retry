@@ -7,6 +7,7 @@ use App\Models\Purchase;
 use App\Models\User;
 use Database\Seeders\MasterDataSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class PurchaseTest extends TestCase
@@ -19,7 +20,7 @@ class PurchaseTest extends TestCase
         $this->seed(MasterDataSeeder::class);
     }
 
-    /** @test */
+    #[Test]
     public function 「購入する」ボタンを押下すると購入が完了する()
     {
         $user = User::factory()->create();
@@ -47,7 +48,7 @@ class PurchaseTest extends TestCase
         $this->assertEquals(Purchase::STATUS_COMPLETED, $purchase->fresh()->status);
     }
 
-    /** @test */
+    #[Test]
     public function コンビニ払いでも支払い完了通知で購入が完了する()
     {
         $sessionId = 'test_convenience_id';
@@ -72,7 +73,7 @@ class PurchaseTest extends TestCase
         $this->assertEquals(Purchase::STATUS_COMPLETED, $purchase->fresh()->status);
     }
 
-    /** @test */
+    #[Test]
     public function 購入した商品は商品一覧画面にて「sold」と表示される()
     {
         $user = User::factory()->create();
@@ -89,7 +90,7 @@ class PurchaseTest extends TestCase
             ->assertSee('Sold');
     }
 
-    /** @test */
+    #[Test]
     public function 購入した商品がプロフィールの購入した商品一覧に表示される()
     {
         $user = User::factory()->create();

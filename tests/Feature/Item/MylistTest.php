@@ -8,6 +8,7 @@ use App\Models\Purchase;
 use App\Models\User;
 use Database\Seeders\MasterDataSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class MylistTest extends TestCase
@@ -20,7 +21,7 @@ class MylistTest extends TestCase
         $this->seed(MasterDataSeeder::class);
     }
 
-    /** @test */
+    #[Test]
     public function いいねした商品だけが表示される()
     {
         $user = User::factory()->create();
@@ -36,7 +37,7 @@ class MylistTest extends TestCase
         $response->assertDontSee('その他の商品');
     }
 
-    /** @test */
+    #[Test]
     public function 購入済み商品は「sold」と表示される()
     {
         $user = User::factory()->create();
@@ -53,7 +54,7 @@ class MylistTest extends TestCase
         $response->assertSee('Sold');
     }
 
-    /** @test */
+    #[Test]
     public function 未認証の場合は何も表示されない()
     {
         $item = Item::factory()->create(['name' => '誰かの商品']);

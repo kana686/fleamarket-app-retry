@@ -6,6 +6,7 @@ use App\Models\Item;
 use App\Models\User;
 use Database\Seeders\MasterDataSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class CommentTest extends TestCase
@@ -18,7 +19,7 @@ class CommentTest extends TestCase
         $this->seed(MasterDataSeeder::class);
     }
 
-    /** @test */
+    #[Test]
     public function ログインユーザーはコメントを送信できる()
     {
         $user = User::factory()->create();
@@ -38,7 +39,7 @@ class CommentTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function ログイン前のユーザーはコメントを送信できない()
     {
         $item = Item::factory()->create();
@@ -51,7 +52,7 @@ class CommentTest extends TestCase
         $this->assertDatabaseMissing('comments', ['content' => 'テストコメント']);
     }
 
-    /** @test */
+    #[Test]
     public function バリデーションエラー_コメントが空の場合はエラーになる()
     {
         $user = User::factory()->create();
@@ -62,7 +63,7 @@ class CommentTest extends TestCase
             ->assertSessionHasErrors(['content' => 'コメントを入力してください']);
     }
 
-    /** @test */
+    #[Test]
     public function バリデーションエラー_コメントが256文字以上の場合はエラーになる()
     {
         $user = User::factory()->create();

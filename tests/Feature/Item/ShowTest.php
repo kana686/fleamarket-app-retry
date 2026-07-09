@@ -8,6 +8,7 @@ use App\Models\Condition;
 use App\Models\Item;
 use Database\Seeders\MasterDataSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class ShowTest extends TestCase
@@ -20,7 +21,7 @@ class ShowTest extends TestCase
         $this->seed(MasterDataSeeder::class);
     }
 
-    /** @test */
+    #[Test]
     public function 商品詳細画面に必要な情報がすべて表示される()
     {
         $condition = Condition::where('content', '良好')->first();
@@ -44,7 +45,7 @@ class ShowTest extends TestCase
         $response->assertSee($comment->user->name);
     }
 
-    /** @test */
+    #[Test]
     public function 複数選択されたカテゴリがすべて表示される()
     {
         $categories = Category::all()->take(2);

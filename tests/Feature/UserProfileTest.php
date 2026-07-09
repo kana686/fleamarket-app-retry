@@ -7,6 +7,7 @@ use App\Models\Purchase;
 use App\Models\User;
 use Database\Seeders\MasterDataSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class UserProfileTest extends TestCase
@@ -19,7 +20,7 @@ class UserProfileTest extends TestCase
         $this->seed(MasterDataSeeder::class);
     }
 
-    /** @test */
+    #[Test]
     public function プロフィールページで必要な情報が取得できる()
     {
         $me = User::factory()->create([
@@ -56,7 +57,7 @@ class UserProfileTest extends TestCase
             ->assertDontSee('出品した腕時計');
     }
 
-    /** @test */
+    #[Test]
     public function プロフィール編集画面に初期値が正しく表示される()
     {
         $user = User::factory()->create([

@@ -9,6 +9,7 @@ use App\Models\User;
 use Database\Seeders\ItemSeeder;
 use Database\Seeders\MasterDataSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class ItemIndexTest extends TestCase
@@ -21,7 +22,7 @@ class ItemIndexTest extends TestCase
         $this->seed(MasterDataSeeder::class);
     }
 
-    /** @test */
+    #[Test]
     public function 全商品を取得できる()
     {
         $this->seed(ItemSeeder::class);
@@ -40,7 +41,7 @@ class ItemIndexTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function 購入済み商品は「_sold」と表示される()
     {
         $this->seed(MasterDataSeeder::class);
@@ -56,7 +57,7 @@ class ItemIndexTest extends TestCase
         $response->assertSee('Sold');
     }
 
-    /** @test */
+    #[Test]
     public function 自分が出品した商品は表示されない()
     {
         $this->seed(MasterDataSeeder::class);
@@ -74,7 +75,7 @@ class ItemIndexTest extends TestCase
         $response->assertSee($otherItem->name);
     }
 
-    /** @test */
+    #[Test]
     public function 商品名で部分一致検索ができる()
     {
         $targetItem = Item::factory()->create(['name' => '美味しい時計']);
@@ -86,7 +87,7 @@ class ItemIndexTest extends TestCase
         $response->assertDontSee('おいしいお皿');
     }
 
-    /** @test */
+    #[Test]
     public function 検索状態がマイリストでも保持されている()
     {
         $user = User::factory()->create();
