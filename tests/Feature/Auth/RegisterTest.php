@@ -3,13 +3,14 @@
 namespace Tests\Feature\Auth;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class RegisterTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function 名前が未入力だとバリデーションエラーになる()
     {
         $this->from('/register')->post('/register', [
@@ -20,7 +21,7 @@ class RegisterTest extends TestCase
         ])->assertSessionHasErrors(['name' => 'お名前を入力してください']);
     }
 
-    /** @test */
+    #[Test]
     public function メールアドレスが未入力だとバリデーションエラーになる()
     {
         $this->from('/register')->post('/register', [
@@ -31,7 +32,7 @@ class RegisterTest extends TestCase
         ])->assertSessionHasErrors(['email' => 'メールアドレスを入力してください']);
     }
 
-    /** @test */
+    #[Test]
     public function パスワードが未入力だとバリデーションエラーになる()
     {
         $this->from('/register')->post('/register', [
@@ -42,7 +43,7 @@ class RegisterTest extends TestCase
         ])->assertSessionHasErrors(['password' => 'パスワードを入力してください']);
     }
 
-    /** @test */
+    #[Test]
     public function test_必須項目が未入力だとバリデーションメッセージが表示される()
     {
         $response = $this->post('/register', [
@@ -59,7 +60,7 @@ class RegisterTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function test_パスワードが7文字以下だとエラーになる()
     {
         $response = $this->post('/register', [
@@ -72,7 +73,7 @@ class RegisterTest extends TestCase
         $response->assertSessionHasErrors(['password' => 'パスワードは8文字以上で入力してください']);
     }
 
-    /** @test */
+    #[Test]
     public function test_確認用パスワードと一致しないとエラーになる()
     {
         $response = $this->post('/register', [
@@ -85,7 +86,7 @@ class RegisterTest extends TestCase
         $response->assertSessionHasErrors(['password' => 'パスワードと一致しません']);
     }
 
-    /** @test */
+    #[Test]
     public function test_正常に会員登録できてプロフィール画面へ遷移する()
     {
         $response = $this->post('/register', [

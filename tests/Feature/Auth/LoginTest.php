@@ -4,13 +4,14 @@ namespace Tests\Feature\Auth;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class LoginTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function メールアドレスが未入力だとエラーになる()
     {
         $this->from('/login')->post('/login', [
@@ -19,7 +20,7 @@ class LoginTest extends TestCase
         ])->assertSessionHasErrors(['email' => 'メールアドレスを入力してください']);
     }
 
-    /** @test */
+    #[Test]
     public function パスワードが未入力だとエラーになる()
     {
         $this->from('/login')->post('/login', [
@@ -28,7 +29,7 @@ class LoginTest extends TestCase
         ])->assertSessionHasErrors(['password' => 'パスワードを入力してください']);
     }
 
-    /** @test */
+    #[Test]
     public function 登録済みのユーザーでログインできる()
     {
         $user = User::factory()->create([
@@ -45,7 +46,7 @@ class LoginTest extends TestCase
         $response->assertRedirect('/');
     }
 
-    /** @test */
+    #[Test]
     public function 間違ったパスワードではログインできない()
     {
         $user = User::factory()->create([
@@ -62,7 +63,7 @@ class LoginTest extends TestCase
         $response->assertSessionHasErrors(['email' => 'ログイン情報が登録されていません']);
     }
 
-    /** @test */
+    #[Test]
     public function 登録されていないメールアドレスではログインできない()
     {
         $user = User::factory()->create([

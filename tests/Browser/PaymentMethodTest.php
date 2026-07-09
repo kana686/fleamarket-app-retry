@@ -5,13 +5,14 @@ namespace Tests\Browser;
 use App\Models\Item;
 use App\Models\User;
 use Database\Seeders\MasterDataSeeder;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\DuskTestCase;
 
 class PaymentMethodTest extends DuskTestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     protected function setUp(): void
     {
@@ -19,7 +20,7 @@ class PaymentMethodTest extends DuskTestCase
         $this->seed(MasterDataSeeder::class);
     }
 
-    /** @test */
+    #[Test]
     public function 支払い方法を選択すると小計画面に反映される()
     {
         $seller = User::factory()->create();
@@ -28,18 +29,15 @@ class PaymentMethodTest extends DuskTestCase
             'user_id' => $seller->id,
         ]);
 
-        $this->actingAs($buyer);
-
         $this->browse(function (Browser $browser) use ($buyer, $item) {
-            $browser->visit(route('purchases.checkout', $item->id))
-                    ->waitFor('#payment-method-select', 10);
+            $browser->loginAs($buyer)
+                ->visit(route('purchases.checkout', $item->id))
+                ->waitFor('#payment-method-select', 10);
 
-            $browser->click('#payment-method-select')
-                    ->select('payment_method', 'カード支払い')
-                    ->script("document.getElementById('payment-method-select').dispatchEvent(new Event('change'));");
+            $browser->select('payment_method', 2)
+                ->script("document.getElementById('payment-method-select').dispatchEvent(new Event('change'));");
 
-            $browser->waitForText('カード支払い', 10)
-                    ->assertSeeIn('#payment-method-display', 'カード支払い');
+            $browser->waitForTextIn('#payment-method-display', 'カード支払い');
         });
     }
 }

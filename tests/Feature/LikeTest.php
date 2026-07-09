@@ -7,6 +7,7 @@ use App\Models\Mylist;
 use App\Models\User;
 use Database\Seeders\MasterDataSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class LikeTest extends TestCase
@@ -19,7 +20,7 @@ class LikeTest extends TestCase
         $this->seed(MasterDataSeeder::class);
     }
 
-    /** @test */
+    #[Test]
     public function いいねアイコン押下でログインユーザーはいいねを登録できる()
     {
         $user = User::factory()->create();
@@ -36,7 +37,7 @@ class LikeTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function いいね済みのアイコンは色が変化する()
     {
         $user = User::factory()->create();
@@ -49,7 +50,7 @@ class LikeTest extends TestCase
             ->assertSee('logo-heart-pink.png');
     }
 
-    /** @test */
+    #[Test]
     public function 再度いいねアイコン押下でログインユーザーはいいねを解除できる()
     {
         $user = User::factory()->create();
